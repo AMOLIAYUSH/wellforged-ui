@@ -1,0 +1,93 @@
+import { Check, X, Shield, FlaskConical, Leaf } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
+
+const comparisonData = [
+    {
+        feature: "Lab Results",
+        wellforged: { text: "Public & Real-time", icon: Check, highlight: true },
+        typical: { text: "None / Internal Only", icon: X },
+    },
+    {
+        feature: "Sourcing",
+        wellforged: { text: "Traceable Single-Origin", icon: Check, highlight: true },
+        typical: { text: "Blended / Unlisted", icon: X },
+    },
+    {
+        feature: "Heavy Metals",
+        wellforged: { text: "Non-Detectable (Tested)", icon: Check, highlight: true },
+        typical: { text: "Compliance Standard only", icon: X },
+    },
+    {
+        feature: "Fillers",
+        wellforged: { text: "0.0% Purity", icon: Check, highlight: true },
+        typical: { text: "Maltodextrin/Flavors", icon: X },
+    },
+];
+
+const TrustComparison = () => {
+    return (
+        <section className="section-padding bg-background relative overflow-hidden">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <ScrollReveal animation="fade-up" className="text-center mb-10 sm:mb-16">
+                    <span className="inline-block font-body text-[10px] sm:text-xs uppercase tracking-[0.2em] text-primary/70 mb-3">Transparency Benchmark</span>
+                    <h2 className="font-display font-bold text-foreground mb-4" style={{ fontSize: "var(--text-3xl)" }}>
+                        Closing the Trust Gap
+                    </h2>
+                    <p className="font-body text-muted-foreground max-w-2xl mx-auto leading-relaxed" style={{ fontSize: "var(--text-base)" }}>
+                        In an industry built on vague claims, we provide verifiable proof. See how our standards compare to the market default.
+                    </p>
+                </ScrollReveal>
+
+                <ScrollReveal animation="scale" delay={200}>
+                    <div className="glass-card overflow-hidden border-2 border-primary/10 shadow-elevated">
+                        <div className="grid grid-cols-[1fr,1.2fr,1fr] bg-secondary/50 border-b border-border">
+                            <div className="p-4 sm:p-6 font-display font-bold text-[10px] sm:text-xs uppercase tracking-widest text-muted-foreground">Standard</div>
+                            <div className="p-4 sm:p-6 bg-primary/5 border-x border-primary/10 font-display font-bold text-[10px] sm:text-xs uppercase tracking-widest text-primary text-center">WellForged</div>
+                            <div className="p-4 sm:p-6 font-display font-bold text-[10px] sm:text-xs uppercase tracking-widest text-muted-foreground text-right">Typical Brand</div>
+                        </div>
+
+                        {comparisonData.map((row, index) => (
+                            <div key={row.feature} className={`grid grid-cols-[1fr,1.2fr,1fr] items-center border-b border-border/50 last:border-0 hover:bg-muted/30 transition-colors`}>
+                                <div className="p-4 sm:p-6 font-display font-semibold text-foreground" style={{ fontSize: "var(--text-sm)" }}>
+                                    {row.feature}
+                                </div>
+
+                                <div className="p-4 sm:p-6 bg-primary/[0.02] border-x border-primary/5 flex flex-col items-center justify-center gap-1.5 min-h-[80px] sm:min-h-[100px]">
+                                    <row.wellforged.icon className="h-5 w-5 text-primary" />
+                                    <span className="font-body font-bold text-primary text-center" style={{ fontSize: "var(--text-xs)" }}>
+                                        {row.wellforged.text}
+                                    </span>
+                                </div>
+
+                                <div className="p-4 sm:p-6 flex flex-col items-center sm:items-end justify-center gap-1.5 opacity-60">
+                                    <row.typical.icon className="h-5 w-5 text-muted-foreground" />
+                                    <span className="font-body font-medium text-muted-foreground text-center sm:text-right" style={{ fontSize: "var(--text-xs)" }}>
+                                        {row.typical.text}
+                                    </span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </ScrollReveal>
+
+                <ScrollReveal animation="fade-up" delay={400} className="mt-10 text-center">
+                    <div className="inline-flex items-center gap-6 px-6 py-4 rounded-2xl bg-secondary/50 border border-border">
+                        <div className="flex -space-x-2">
+                            {[1, 2, 3].map(i => (
+                                <div key={i} className="h-8 w-8 rounded-full border-2 border-background bg-muted flex items-center justify-center overflow-hidden">
+                                    <Shield className="h-4 w-4 text-primary/40" />
+                                </div>
+                            ))}
+                        </div>
+                        <p className="font-body text-xs text-muted-foreground text-left">
+                            <span className="font-bold text-foreground">5,000+</span> Customers have switched to <br />
+                            WellForged for clinical-grade certainty.
+                        </p>
+                    </div>
+                </ScrollReveal>
+            </div>
+        </section>
+    );
+};
+
+export default TrustComparison;
