@@ -183,7 +183,7 @@ const AuthPage = () => {
         setSignUpStep("details");
     };
 
-    const inputCls = "w-full h-12 px-4 bg-white/70 border border-white/40 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/15 focus:outline-none transition-all text-sm text-foreground placeholder:text-muted-foreground/60 shadow-sm";
+    const inputCls = "w-full h-12 px-4 bg-white/70 border border-white/40 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/15 focus:outline-none transition-all text-base md:text-sm text-foreground placeholder:text-muted-foreground/60 shadow-sm";
 
     return (
         <>
@@ -260,7 +260,7 @@ const AuthPage = () => {
                     style={{ background: "linear-gradient(160deg, #f8faf8 0%, #f2f7f3 50%, #edf4ee 100%)" }}>
 
                     {/* Top nav strip */}
-                    <div className="flex items-center justify-between px-6 pt-6 lg:px-10">
+                    <div className="flex items-center justify-between px-4 sm:px-6 pt-4 sm:pt-6 lg:px-10">
                         <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground/70 hover:text-foreground text-sm transition-colors group">
                             <ArrowLeft className="h-4 w-4 group-hover:-translate-x-0.5 transition-transform" />
                             <span>Home</span>
@@ -274,14 +274,14 @@ const AuthPage = () => {
                     </div>
 
                     {/* Form area */}
-                    <div className="flex-1 flex items-center justify-center px-6 py-10 lg:px-16">
+                    <div className="flex-1 flex items-center justify-center px-4 sm:px-6 py-8 sm:py-10 lg:px-16">
                         <div className="w-full max-w-sm">
 
                             {/* ─── SIGN IN ──────────────────────────────────── */}
                             {view === "signin" && (
                                 <div className="animate-in fade-in slide-in-from-bottom-3 duration-300">
                                     <div className="mb-8">
-                                        <h1 className="font-display text-3xl font-bold text-foreground mb-2">Welcome back 👋</h1>
+                                        <h1 className="font-display text-[1.9rem] sm:text-3xl font-bold text-foreground mb-2">Welcome back 👋</h1>
                                         <p className="text-muted-foreground text-sm">Sign in with your WhatsApp number</p>
                                     </div>
 
@@ -290,7 +290,7 @@ const AuthPage = () => {
                                         {signInStep === "phone" ? (
                                             <form onSubmit={handleRequestSignInOtp} className="space-y-5">
                                                 <div className="space-y-2">
-                                                    <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/80">WhatsApp Number</label>
+                                                    <label className="text-[10px] font-bold uppercase tracking-[0.14em] sm:tracking-widest text-muted-foreground/80">WhatsApp Number</label>
                                                     <div className="relative">
                                                         <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
                                                             <span className="text-sm font-semibold text-foreground/70 pr-3 border-r border-border">+91</span>
@@ -316,7 +316,7 @@ const AuthPage = () => {
                                             <form onSubmit={handleSignIn} className="space-y-5 animate-in fade-in slide-in-from-right-3 duration-300">
                                                 <div className="space-y-2">
                                                     <div className="flex items-center justify-between">
-                                                        <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/80">OTP Sent</label>
+                                                        <label className="text-[10px] font-bold uppercase tracking-[0.14em] sm:tracking-widest text-muted-foreground/80">OTP Sent</label>
                                                         <button type="button" onClick={() => setSignInStep("phone")}
                                                             className="text-[10px] text-primary font-bold hover:underline underline-offset-2">
                                                             ← Change number
@@ -330,7 +330,7 @@ const AuthPage = () => {
                                                         type="text"
                                                         value={signInOtp}
                                                         onChange={e => setSignInOtp(e.target.value.replace(/\D/g, "").slice(0, 4))}
-                                                        className={`${inputCls} tracking-[0.6em] text-center text-2xl font-bold`}
+                                                            className={`${inputCls} tracking-[0.45em] sm:tracking-[0.6em] text-center text-xl sm:text-2xl font-bold`}
                                                         placeholder="• • • •"
                                                         maxLength={4}
                                                         autoFocus
@@ -362,7 +362,7 @@ const AuthPage = () => {
                             {view === "signup" && (
                                 <div className="animate-in fade-in slide-in-from-bottom-3 duration-300">
                                     <div className="mb-8">
-                                        <h1 className="font-display text-3xl font-bold text-foreground mb-2">
+                                        <h1 className="font-display text-[1.9rem] sm:text-3xl font-bold text-foreground mb-2">
                                             {signUpStep === "details" ? "Join WellForged ✨" : "Almost there!"}
                                         </h1>
                                         <p className="text-muted-foreground text-sm">
@@ -382,7 +382,7 @@ const AuthPage = () => {
                                         {signUpStep === "details" ? (
                                             <form onSubmit={handleRequestSignUpOtp} className="space-y-4">
                                                 <div className="space-y-2">
-                                                    <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/80">Full Name</label>
+                                                    <label className="text-[10px] font-bold uppercase tracking-[0.14em] sm:tracking-widest text-muted-foreground/80">Full Name</label>
                                                     <input
                                                         type="text"
                                                         value={fullName}
@@ -395,7 +395,7 @@ const AuthPage = () => {
                                                 </div>
 
                                                 <div className="space-y-2">
-                                                    <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/80">WhatsApp Number</label>
+                                                    <label className="text-[10px] font-bold uppercase tracking-[0.14em] sm:tracking-widest text-muted-foreground/80">WhatsApp Number</label>
                                                     <div className="relative">
                                                         <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
                                                             <span className="text-sm font-semibold text-foreground/70 pr-3 border-r border-border">+91</span>
@@ -451,7 +451,7 @@ const AuthPage = () => {
                                             <form onSubmit={handleSignUp} className="space-y-5 animate-in fade-in slide-in-from-right-3 duration-300">
                                                 <div className="space-y-2">
                                                     <div className="flex items-center justify-between">
-                                                        <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/80">Enter OTP</label>
+                                                        <label className="text-[10px] font-bold uppercase tracking-[0.14em] sm:tracking-widest text-muted-foreground/80">Enter OTP</label>
                                                         <button type="button" onClick={() => setSignUpStep("details")}
                                                             className="text-[10px] text-primary font-bold hover:underline underline-offset-2">
                                                             ← Edit details
@@ -465,7 +465,7 @@ const AuthPage = () => {
                                                         type="text"
                                                         value={signUpOtp}
                                                         onChange={e => setSignUpOtp(e.target.value.replace(/\D/g, "").slice(0, 4))}
-                                                        className={`${inputCls} tracking-[0.6em] text-center text-2xl font-bold`}
+                                                        className={`${inputCls} tracking-[0.45em] sm:tracking-[0.6em] text-center text-xl sm:text-2xl font-bold`}
                                                         placeholder="• • • •"
                                                         maxLength={4}
                                                         autoFocus

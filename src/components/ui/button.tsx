@@ -18,10 +18,10 @@ const buttonVariants = cva(
         hero: "bg-primary text-primary-foreground shadow-md btn-glow hover:bg-forest-light hover:shadow-xl",
       },
       size: {
-        default: "h-11 px-6 py-2.5",
+        default: "h-10 sm:h-11 px-5 sm:px-6 py-2.5",
         sm: "h-9 rounded-md px-3",
-        lg: "h-12 rounded-md px-8",
-        xl: "h-14 rounded-md px-10 text-base font-semibold",
+        lg: "h-11 sm:h-12 rounded-md px-6 sm:px-8",
+        xl: "h-12 sm:h-14 rounded-md px-6 sm:px-10 text-sm sm:text-base font-semibold",
         icon: "h-10 w-10",
       },
     },

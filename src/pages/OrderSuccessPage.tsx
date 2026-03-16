@@ -18,16 +18,16 @@ const OrderSuccessPage = () => {
     return (
         <>
             <Navbar />
-            <div className="relative min-h-screen bg-background pt-24 pb-12 overflow-hidden">
+            <div className="relative min-h-screen bg-background page-pt pt-8 sm:pt-12 pb-12 overflow-hidden">
                 <Confetti width={windowSize.width} height={windowSize.height} recycle={false} numberOfPieces={200} gravity={0.1} colors={['#F59E0B', '#10B981', '#3B82F6']} />
 
                 <div className="max-w-3xl mx-auto px-4 text-center">
                     <div className="animate-hero-fade-up">
-                        <div className="inline-flex items-center justify-center h-20 w-20 bg-primary/10 rounded-full mb-6">
+                        <div className="inline-flex items-center justify-center h-16 w-16 sm:h-20 sm:w-20 bg-primary/10 rounded-full mb-6">
                             <CheckCircle className="h-10 w-10 text-primary animate-pulse" />
                         </div>
-                        <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">Investment Confirmed.</h1>
-                        <p className="font-body text-lg sm:text-xl text-muted-foreground mb-10 max-w-xl mx-auto leading-relaxed">
+                        <h1 className="font-display text-3xl sm:text-5xl font-bold text-foreground mb-4">Investment Confirmed.</h1>
+                        <p className="font-body text-base sm:text-xl text-muted-foreground mb-8 sm:mb-10 max-w-xl mx-auto leading-relaxed">
                             You haven't just bought a supplement; you've invested in <span className="text-foreground font-semibold">Radical Transparency</span>.
                             We're preparing your batch for dispatch.
                         </p>
@@ -52,7 +52,7 @@ const OrderSuccessPage = () => {
 
                     <div className="animate-hero-fade-up-delay-5">
                         <Link to="/product">
-                            <Button variant="hero" size="xl" className="px-10 h-16 text-lg">
+                            <Button variant="hero" size="xl" className="px-6 sm:px-10 h-12 sm:h-16 text-sm sm:text-lg">
                                 Continue Exploring
                             </Button>
                         </Link>

@@ -174,7 +174,7 @@ const CheckoutPage = () => {
                         <label className="font-body text-[var(--text-xs)] font-bold uppercase tracking-widest text-foreground mb-1.5 block">Address *</label>
                         <Input name="address" value={formData.address} onChange={handleInputChange} placeholder="House/Flat No., Street, Locality" className="h-[var(--space-xl)]" />
                       </div>
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                           <label className="font-body text-[var(--text-xs)] font-bold uppercase tracking-widest text-foreground mb-1.5 block">Pincode *</label>
                           <Input name="pincode" value={formData.pincode} onChange={handleInputChange} placeholder="6-digit pincode" className="h-[var(--space-xl)]" />
@@ -190,7 +190,7 @@ const CheckoutPage = () => {
                       </div>
                     </div>
 
-                    <Button variant="hero" size="xl" className="w-full h-[var(--space-xl)] mt-6 font-bold uppercase tracking-widest" onClick={handleContinue}>
+                    <Button variant="hero" size="xl" className="w-full h-[var(--space-xl)] mt-6 font-bold uppercase tracking-[0.14em] sm:tracking-widest" onClick={handleContinue}>
                       Continue to Summary
                     </Button>
                   </div>
@@ -263,12 +263,12 @@ const CheckoutPage = () => {
                     {!appliedCoupon ? (
                       <div className="space-y-2">
                         <label className="font-body text-xs font-medium text-muted-foreground">Have a coupon code?</label>
-                        <div className="flex gap-2">
+                        <div className="flex flex-col sm:flex-row gap-2">
                           <Input
                             value={couponCode}
                             onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
                             placeholder="Enter code"
-                            className="h-10 text-sm"
+                            className="h-10 w-full text-base md:text-sm"
                             disabled={isValidatingCoupon}
                           />
                           <Button
@@ -276,7 +276,7 @@ const CheckoutPage = () => {
                             size="sm"
                             onClick={handleApplyCoupon}
                             disabled={isValidatingCoupon || !couponCode.trim()}
-                            className="h-10 gap-1.5 px-4"
+                            className="h-10 gap-1.5 px-4 w-full sm:w-auto"
                           >
                             <Tag className="h-3.5 w-3.5" />
                             {isValidatingCoupon ? "Checking..." : "Apply"}

@@ -197,13 +197,13 @@ const TransparencyPage = () => {
         <section className="flex-1 flex items-center justify-center px-[var(--space-sm)] py-[var(--space-xl)] bg-gradient-to-b from-secondary via-secondary to-background">
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full mb-[var(--space-xs)] animate-fade-up"><Shield className="h-3 w-3 text-primary" /><span className="font-mono text-[var(--text-xs)] uppercase tracking-[0.15em] text-primary">Secure Verification</span></div>
-            <h1 className="font-display font-bold text-foreground mb-[var(--space-md)] animate-fade-up delay-100" style={{ fontSize: "var(--text-5xl)" }}>Turn Skepticism Into Confidence</h1>
+            <h1 className="font-display font-bold text-foreground mb-[var(--space-md)] animate-fade-up delay-100" style={{ fontSize: "var(--text-4xl)" }}>Turn Skepticism Into Confidence</h1>
             <form onSubmit={handleSearch} className="max-w-xl mx-auto animate-fade-up delay-200">
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-gold/20 to-primary/20 rounded-2xl blur-lg opacity-0 group-focus-within:opacity-100 transition-opacity duration-500" />
                 <div className="relative flex items-center">
                   <div className="absolute left-[var(--space-sm)] top-1/2 -translate-y-1/2 text-muted-foreground"><Search className="h-5 w-5" /></div>
-                  <input type="text" placeholder="WF2026021212" value={batchNumber} onChange={(e) => setBatchNumber(e.target.value)} className="w-full h-[var(--space-2xl)] pl-[var(--space-xl)] pr-[var(--space-md)] bg-card border-2 border-border text-foreground placeholder:text-muted-foreground rounded-xl font-body text-[var(--text-xl)] text-center transition-all duration-300 focus:outline-none focus:border-primary focus:shadow-[0_0_40px_-5px_hsl(var(--primary)/0.5)]" required />
+                  <input type="text" placeholder="WF2026021212" value={batchNumber} onChange={(e) => setBatchNumber(e.target.value)} className="w-full h-[var(--space-2xl)] pl-[var(--space-xl)] pr-[var(--space-md)] bg-card border-2 border-border text-foreground placeholder:text-muted-foreground rounded-xl font-mono text-base sm:text-lg md:text-[var(--text-xl)] text-center transition-all duration-300 focus:outline-none focus:border-primary focus:shadow-[0_0_40px_-5px_hsl(var(--primary)/0.5)]" required />
                 </div>
               </div>
               <Button type="submit" disabled={isLoading} variant="hero" size="lg" className="mt-[var(--space-sm)] w-full sm:w-auto h-[var(--space-xl)] px-10 font-bold uppercase tracking-widest gap-2 text-primary-foreground">
@@ -267,8 +267,8 @@ const TransparencyPage = () => {
                         <Sparkles className="h-4 w-4 text-primary" />
                         <span className="font-mono text-[10px] font-bold text-primary uppercase tracking-widest">Plain English Summary</span>
                       </div>
-                      <h3 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-3">Result: Safe & Pure</h3>
-                      <p className="font-body text-base sm:text-lg text-muted-foreground leading-relaxed">
+                      <h3 className="font-display text-xl sm:text-3xl font-bold text-foreground mb-3">Result: Safe & Pure</h3>
+                      <p className="font-body text-sm sm:text-lg text-muted-foreground leading-relaxed">
                         This batch has been rigorously tested. It contains <span className="text-foreground font-bold">Zero Fillers</span>,
                         shows <span className="text-foreground font-bold">No Detectable Heavy Metals</span>, and meets our
                         highest potency standards for chlorophyll and active compounds.

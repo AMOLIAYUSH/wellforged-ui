@@ -90,7 +90,7 @@ const VerifiedReviews = () => {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <ScrollReveal animation="fade-up" className="text-center mb-12 sm:mb-20">
-                    <span className="inline-block font-body text-[10px] sm:text-xs uppercase tracking-[0.2em] text-primary/70 mb-3">Community Voices</span>
+                    <span className="inline-block font-body text-[10px] sm:text-xs uppercase tracking-[0.14em] sm:tracking-[0.2em] text-primary/70 mb-3">Community Voices</span>
                     <h2 className="font-display font-bold text-foreground mb-4" style={{ fontSize: "var(--text-3xl)" }}>
                         Trust, Verified by You
                     </h2>
@@ -100,10 +100,10 @@ const VerifiedReviews = () => {
                         ))}
                         <span className="ml-2 font-display text-lg font-bold text-foreground">4.9 / 5.0</span>
                     </div>
-                    <p className="font-body text-muted-foreground text-sm uppercase tracking-widest">Across 500+ Verified Customers</p>
+                    <p className="font-body text-muted-foreground text-xs sm:text-sm uppercase tracking-[0.14em] sm:tracking-widest">Across 500+ Verified Customers</p>
                 </ScrollReveal>
 
-                <div className="relative group/carousel px-4 sm:px-12">
+                <div className="relative group/carousel px-1 sm:px-12">
                     <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
                         <div className="flex gap-6 lg:gap-8">
                             {reviews.map((review, index) => (
@@ -164,7 +164,7 @@ const VerifiedReviews = () => {
                 </div>
 
                 <ScrollReveal animation="fade-up" delay={500} className="mt-12 sm:mt-20 text-center">
-                    <p className="font-body text-primary text-sm font-bold uppercase tracking-widest mb-6">Join the Movement of Informed Consumers</p>
+                    <p className="font-body text-primary text-xs sm:text-sm font-bold uppercase tracking-[0.14em] sm:tracking-widest mb-6">Join the Movement of Informed Consumers</p>
                     <div className="h-px w-24 bg-primary/30 mx-auto" />
                 </ScrollReveal>
             </div>

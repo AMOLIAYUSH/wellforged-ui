@@ -249,7 +249,7 @@ const ProductPage = () => {
                         <div className="mt-[var(--space-lg)] sm:mt-[var(--space-xl)]">
                             <ScrollReveal animation="fade-up">
                                 <div className="space-y-[var(--space-sm)] sm:space-y-[var(--space-md)]">
-                                    <h2 className="font-display font-semibold text-foreground text-center" style={{ fontSize: "var(--text-3xl)" }}>Ingredient Profile</h2>
+                                    <h2 className="font-display font-semibold text-foreground text-center" style={{ fontSize: "var(--text-2xl)" }}>Ingredient Profile</h2>
                                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
                                         {ingredients.map(({ icon: Icon, name, description }) => (
                                             <div key={name} className="flex flex-col items-center text-center gap-2 sm:gap-3 p-3 sm:p-4 bg-primary/5 rounded-xl border border-primary/10 transition-all duration-200 hover:bg-primary/10 h-full">
@@ -270,9 +270,9 @@ const ProductPage = () => {
                     <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
                         <ScrollReveal animation="fade-up">
                             <div className="text-center mb-[var(--space-lg)] sm:mb-[var(--space-xl)]">
-                                <span className="inline-block font-body text-[var(--text-xs)] uppercase tracking-widest text-gold mb-[var(--space-2xs)]">Quality Reference</span>
-                                <h2 className="font-display font-semibold text-foreground mb-[var(--space-xs)] text-gold-gradient" style={{ fontSize: "var(--text-4xl)" }}>Technical Specifications</h2>
-                                <p className="font-body text-muted-foreground max-w-xl sm:max-w-2xl mx-auto px-2" style={{ fontSize: "var(--text-lg)" }}>Complete transparency on our sourcing, testing protocols, and purity standards.</p>
+                                <span className="inline-block font-body text-[var(--text-xs)] uppercase tracking-[0.14em] sm:tracking-widest text-gold mb-[var(--space-2xs)]">Quality Reference</span>
+                                <h2 className="font-display font-semibold text-foreground mb-[var(--space-xs)] text-gold-gradient" style={{ fontSize: "var(--text-3xl)" }}>Technical Specifications</h2>
+                                <p className="font-body text-muted-foreground max-w-xl sm:max-w-2xl mx-auto px-2" style={{ fontSize: "var(--text-base)" }}>Complete transparency on our sourcing, testing protocols, and purity standards.</p>
                             </div>
                         </ScrollReveal>
                         <div className="max-w-4xl mx-auto">
@@ -352,8 +352,8 @@ const ProductPage = () => {
                     {/* Process Animation Overlay */}
                     <div className={`absolute inset-0 bg-primary z-50 flex items-center justify-center transition-all duration-700 pointer-events-none ${isTransitioning ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`}>
                         <div className="text-center">
-                            <div className="mb-6 flex justify-center"><Shield className="h-16 w-16 text-primary-foreground animate-shield-pulse" /></div>
-                            <h2 className="font-display text-3xl font-bold text-primary-foreground mb-2">Accessing Transparency Forge</h2>
+                            <div className="mb-6 flex justify-center"><Shield className="h-12 w-12 sm:h-16 sm:w-16 text-primary-foreground animate-shield-pulse" /></div>
+                            <h2 className="font-display text-2xl sm:text-3xl font-bold text-primary-foreground mb-2">Accessing Transparency Forge</h2>
                             <div className="w-48 h-1 bg-primary-foreground/20 rounded-full mx-auto overflow-hidden">
                                 <div className="h-full bg-primary-foreground animate-shimmer-sweep" />
                             </div>

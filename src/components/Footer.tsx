@@ -31,21 +31,33 @@ const Footer = () => {
               ))}
             </div>
           </div>
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
             <h4 className="font-display text-[10px] sm:text-xs font-semibold text-foreground uppercase tracking-wider mb-1.5 sm:mb-2">Quick Links</h4>
-            <ul className="space-y-[var(--space-2xs)]">
+            <ul className="space-y-[var(--space-2xs)] text-center lg:text-left">
               {quickLinks.map((link) => (
                 <li key={link.name}><Link to={link.href} onClick={() => window.scrollTo(0, 0)} className="font-body text-muted-foreground hover:text-foreground transition-colors py-1 inline-block" style={{ fontSize: "var(--text-sm)" }}>{link.name}</Link></li>
               ))}
             </ul>
           </div>
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
             <h4 className="font-display text-[10px] sm:text-xs font-semibold text-foreground uppercase tracking-wider mb-1.5 sm:mb-2">Contact</h4>
-            <ul className="space-y-1.5 sm:space-y-2">
+            <ul className="space-y-1.5 sm:space-y-2 text-center lg:text-left">
               {contactLinks.map((link) => (
                 <li key={link.name}><a href={link.href} className="font-body text-muted-foreground hover:text-foreground transition-colors py-1.5 inline-block" style={{ fontSize: "var(--text-sm)" }}>{link.name}</a></li>
               ))}
             </ul>
+          </div>
+          <div className="col-span-2 flex flex-col items-center text-center lg:hidden">
+            <img src={wfLogo} alt="WellForged Logo" className="w-8 h-8 object-contain mb-2" />
+            <p className="font-display text-sm text-foreground font-medium">WellForged</p>
+            <p className="font-body text-[10px] text-muted-foreground italic mb-3">Wellness, Forged With Integrity</p>
+            <div className="flex items-center gap-2">
+              {socialLinks.map((social) => (
+                <a key={social.label} href={social.href} className="h-10 w-10 flex items-center justify-center rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-all duration-300" aria-label={social.label}>
+                  <social.icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
         <div className="border-t border-border mt-3 sm:mt-6 pt-3 sm:pt-4">

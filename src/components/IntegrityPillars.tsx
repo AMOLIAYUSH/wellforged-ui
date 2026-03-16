@@ -19,8 +19,8 @@ const IntegrityPillars = () => {
       </div>
       <div className="max-w-7xl mx-auto relative z-10 px-1 sm:px-0">
         <ScrollReveal animation="fade-up" className="text-center mb-[var(--space-xl)]">
-          <span className="inline-block font-body text-[var(--text-xs)] uppercase tracking-[0.2em] text-primary/70 mb-[var(--space-2xs)]">Our Foundation</span>
-          <h2 className="font-display font-semibold text-foreground" style={{ fontSize: "var(--text-4xl)" }}>The Integrity Pillars</h2>
+          <span className="inline-block font-body text-[var(--text-xs)] uppercase tracking-[0.14em] sm:tracking-[0.2em] text-primary/70 mb-[var(--space-2xs)]">Our Foundation</span>
+          <h2 className="font-display font-semibold text-foreground" style={{ fontSize: "var(--text-3xl)" }}>The Integrity Pillars</h2>
         </ScrollReveal>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[var(--space-md)]">
           {pillars.map((pillar, index) => (
@@ -28,7 +28,7 @@ const IntegrityPillars = () => {
               <div className="glass-card p-4 sm:p-6 lg:p-8 xl:p-10 h-full cursor-pointer relative transition-all duration-500 ease-out"
                 onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)}
                 style={{ transform: hoveredIndex === index ? "translateY(-12px) rotateX(5deg) rotateY(-2deg)" : "translateY(0) rotateX(0) rotateY(0)", transformStyle: "preserve-3d", perspective: "1000px" }}>
-                <span className="font-display text-[var(--text-6xl)] font-bold text-primary/10 absolute top-[var(--space-xs)] right-[var(--space-sm)] leading-none">{pillar.number}</span>
+                <span className="font-display text-[var(--text-5xl)] sm:text-[var(--text-6xl)] font-bold text-primary/10 absolute top-[var(--space-xs)] right-[var(--space-sm)] leading-none">{pillar.number}</span>
                 <div className={`h-[var(--space-xl)] w-[var(--space-xl)] rounded-lg sm:rounded-xl bg-primary/10 flex items-center justify-center mb-[var(--space-md)] transition-all duration-300 ${hoveredIndex === index ? "bg-primary/20 scale-110" : ""}`}>
                   <pillar.icon className="h-1/2 w-1/2 text-primary transition-transform duration-300" />
                 </div>

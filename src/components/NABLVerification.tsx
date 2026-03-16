@@ -15,8 +15,8 @@ const NABLVerification = () => {
       <div className="max-w-7xl mx-auto">
         <ScrollReveal>
           <div className="text-center mb-[var(--space-lg)] sm:mb-[var(--space-xl)]">
-            <span className="inline-block font-body text-[var(--text-xs)] lg:text-[var(--text-sm)] uppercase tracking-[0.2em] lg:tracking-[0.3em] text-primary/70 border border-primary/20 px-4 py-2 rounded-full mb-[var(--space-md)]">Lab Verified</span>
-            <h2 className="font-display font-semibold text-foreground mb-[var(--space-sm)]" style={{ fontSize: "var(--text-4xl)" }}>Independent NABL Verification</h2>
+            <span className="inline-block font-body text-[var(--text-xs)] lg:text-[var(--text-sm)] uppercase tracking-[0.14em] sm:tracking-[0.2em] lg:tracking-[0.3em] text-primary/70 border border-primary/20 px-4 py-2 rounded-full mb-[var(--space-md)]">Lab Verified</span>
+            <h2 className="font-display font-semibold text-foreground mb-[var(--space-sm)]" style={{ fontSize: "var(--text-3xl)" }}>Independent NABL Verification</h2>
             <p className="font-body text-[var(--text-base)] sm:text-[var(--text-lg)] text-muted-foreground max-w-xl sm:max-w-2xl mx-auto leading-relaxed px-2">Every batch undergoes rigorous third-party testing at NABL-accredited laboratories. We don't just claim purity — we prove it.</p>
           </div>
         </ScrollReveal>

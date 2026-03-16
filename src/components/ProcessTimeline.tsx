@@ -40,7 +40,7 @@ const ProcessTimeline = () => {
       </div>
       <div className="max-w-5xl mx-auto relative z-10">
         <ScrollReveal animation="fade-up" className="text-center mb-8 sm:mb-12 lg:mb-16 xl:mb-24">
-          <span className="inline-block font-body text-[9px] sm:text-[10px] lg:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] lg:tracking-[0.25em] text-primary/70 mb-2 sm:mb-3 lg:mb-4">Our Process</span>
+          <span className="inline-block font-body text-[9px] sm:text-[10px] lg:text-xs uppercase tracking-[0.12em] sm:tracking-[0.2em] lg:tracking-[0.25em] text-primary/70 mb-2 sm:mb-3 lg:mb-4">Our Process</span>
           <h2 className="font-display font-semibold text-foreground" style={{ fontSize: "var(--text-3xl)" }}>From Source to Certainty</h2>
         </ScrollReveal>
         <div className="relative">
@@ -57,9 +57,9 @@ const ProcessTimeline = () => {
               <ScrollReveal key={step.number} animation="fade-up" delay={index * 150}>
                 <div className={`relative flex items-start gap-4 sm:gap-6 lg:gap-12 xl:gap-16 ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}>
                   <div className={`flex-1 pl-10 sm:pl-14 md:pl-0 ${index % 2 === 0 ? "md:text-right md:pr-12 lg:pr-16" : "md:text-left md:pl-12 lg:pl-16"}`}>
-                    <span className="font-display font-bold text-primary/15 block mb-0.5 sm:mb-1 lg:mb-2" style={{ fontSize: "var(--text-5xl)" }}>{step.number}</span>
+                    <span className="font-display font-bold text-primary/15 block mb-0.5 sm:mb-1 lg:mb-2" style={{ fontSize: "var(--text-4xl)" }}>{step.number}</span>
                     <h3 className="font-display font-semibold text-foreground mb-0.5 sm:mb-1 lg:mb-2" style={{ fontSize: "var(--text-2xl)" }}>{step.title}</h3>
-                    <p className="font-body uppercase tracking-widest text-gold mb-2 sm:mb-3 lg:mb-4" style={{ fontSize: "var(--text-xs)" }}>{step.subtitle}</p>
+                    <p className="font-body uppercase tracking-[0.14em] sm:tracking-widest text-gold mb-2 sm:mb-3 lg:mb-4" style={{ fontSize: "var(--text-xs)" }}>{step.subtitle}</p>
                     <p className="font-body text-muted-foreground leading-relaxed max-w-md" style={{ fontSize: "var(--text-sm)" }}>{step.description}</p>
                   </div>
                   <div className="absolute left-0 md:left-1/2 md:-translate-x-1/2 flex items-center justify-center">
