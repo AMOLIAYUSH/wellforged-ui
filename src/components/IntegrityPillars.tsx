@@ -21,6 +21,7 @@ const IntegrityPillars = () => {
         <ScrollReveal animation="fade-up" className="text-center mb-[var(--space-xl)]">
           <span className="inline-block font-body text-[var(--text-xs)] uppercase tracking-[0.14em] sm:tracking-[0.2em] text-primary/70 mb-[var(--space-2xs)]">Our Foundation</span>
           <h2 className="font-display font-semibold text-foreground" style={{ fontSize: "var(--text-3xl)" }}>The Integrity Pillars</h2>
+          <p className="section-copy max-w-2xl mx-auto mt-3">Every WellForged product is built on traceability, independent verification, and disclosure that respects the customer.</p>
         </ScrollReveal>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[var(--space-md)]">
           {pillars.map((pillar, index) => (
@@ -34,6 +35,11 @@ const IntegrityPillars = () => {
                 </div>
                 <h3 className="font-display font-semibold text-foreground mb-2 sm:mb-3 lg:mb-4" style={{ fontSize: "var(--text-xl)" }}>{pillar.title}</h3>
                 <p className="font-body text-muted-foreground leading-relaxed" style={{ fontSize: "var(--text-sm)" }}>{pillar.description}</p>
+                <p className="font-body text-foreground/80 leading-relaxed mt-3 text-[0.82rem]">
+                  {index === 0 && "We choose inputs that can be traced back to a real growing context, not a generic commodity chain."}
+                  {index === 1 && "That second layer of testing is what turns a claim into a standard you can actually rely on."}
+                  {index === 2 && "The result is a purchase journey where trust is earned through evidence, not branding alone."}
+                </p>
                 <div className={`absolute bottom-0 left-0 h-0.5 sm:h-1 bg-gradient-to-r from-primary to-primary/50 rounded-b-xl sm:rounded-b-2xl transition-all duration-500 ${hoveredIndex === index ? "w-full" : "w-0"}`} />
               </div>
             </ScrollReveal>

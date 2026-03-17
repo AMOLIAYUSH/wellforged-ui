@@ -69,22 +69,6 @@ const TrustComparison = () => {
                         ))}
                     </div>
                 </ScrollReveal>
-
-                <ScrollReveal animation="fade-up" delay={400} className="mt-10 text-center">
-                    <div className="inline-flex items-center gap-4 sm:gap-6 px-4 sm:px-6 py-4 rounded-2xl bg-secondary/50 border border-border">
-                        <div className="flex -space-x-2">
-                            {[1, 2, 3].map(i => (
-                                <div key={i} className="h-8 w-8 rounded-full border-2 border-background bg-muted flex items-center justify-center overflow-hidden">
-                                    <Shield className="h-4 w-4 text-primary/40" />
-                                </div>
-                            ))}
-                        </div>
-                        <p className="font-body text-xs text-muted-foreground text-left">
-                            <span className="font-bold text-foreground">5,000+</span> Customers have switched to <br />
-                            WellForged for clinical-grade certainty.
-                        </p>
-                    </div>
-                </ScrollReveal>
             </div>
         </section>
     );

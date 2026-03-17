@@ -62,25 +62,25 @@
     --gradient-primary: linear-gradient(135deg, hsl(153 30% 22%) 0%, hsl(153 25% 32%) 100%);
 
     /* Shadows */
-    --shadow-soft: 0 4px 20px -4px hsl(153 30% 22% / 0.08);
-    --shadow-card: 0 8px 30px -8px hsl(153 30% 22% / 0.1);
-    --shadow-elevated: 0 20px 50px -15px hsl(153 30% 22% / 0.15);
+    --shadow-soft: 0 10px 30px -24px hsl(153 30% 22% / 0.18);
+    --shadow-card: 0 18px 44px -28px hsl(153 30% 22% / 0.18);
+    --shadow-elevated: 0 28px 70px -34px hsl(153 30% 22% / 0.24);
 
     /* Typography */
     --font-display: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
 
-    /* Mobile-first type scale tuned for steadier contrast across sections */
-    --text-xs: clamp(0.75rem, 0.08vw + 0.72rem, 0.82rem);
-    --text-sm: clamp(0.875rem, 0.12vw + 0.84rem, 0.95rem);
-    --text-base: clamp(1rem, 0.18vw + 0.96rem, 1.06rem);
-    --text-lg: clamp(1.0625rem, 0.3vw + 1rem, 1.2rem);
-    --text-xl: clamp(1.1875rem, 0.55vw + 1.05rem, 1.4rem);
-    --text-2xl: clamp(1.375rem, 0.9vw + 1.15rem, 1.8rem);
-    --text-3xl: clamp(1.7rem, 1.4vw + 1.3rem, 2.5rem);
-    --text-4xl: clamp(2rem, 2.1vw + 1.5rem, 3.3rem);
-    --text-5xl: clamp(2.4rem, 3vw + 1.7rem, 4.2rem);
-    --text-6xl: clamp(2.8rem, 4vw + 1.9rem, 5.25rem);
+    /* Mobile-first type scale tuned for calmer editorial hierarchy */
+    --text-xs: clamp(0.74rem, 0.08vw + 0.72rem, 0.8rem);
+    --text-sm: clamp(0.875rem, 0.12vw + 0.84rem, 0.94rem);
+    --text-base: clamp(0.98rem, 0.18vw + 0.94rem, 1.05rem);
+    --text-lg: clamp(1.04rem, 0.28vw + 0.98rem, 1.18rem);
+    --text-xl: clamp(1.16rem, 0.5vw + 1.02rem, 1.34rem);
+    --text-2xl: clamp(1.34rem, 0.85vw + 1.1rem, 1.72rem);
+    --text-3xl: clamp(1.62rem, 1.25vw + 1.24rem, 2.28rem);
+    --text-4xl: clamp(1.92rem, 1.95vw + 1.38rem, 3rem);
+    --text-5xl: clamp(2.2rem, 2.7vw + 1.55rem, 3.9rem);
+    --text-6xl: clamp(2.55rem, 3.8vw + 1.7rem, 4.95rem);
 
     /* Fluid Spacing - Precision scale at 320px to 1920px */
     --space-2xs: clamp(0.25rem, 0.1vw + 0.2rem, 0.375rem);
@@ -93,7 +93,7 @@
     --space-3xl: clamp(4rem, 8vw + 2rem, 10rem);
 
     /* Navbar Height - Accounts for padding + dynamic height */
-    --nav-height: clamp(4.5rem, 2vw + 4rem, 6rem);
+    --nav-height: clamp(4rem, 1.5vw + 3.8rem, 5.5rem);
   }
 
   .dark {
@@ -177,6 +177,10 @@
     touch-action: manipulation;
   }
 
+  section {
+    scroll-margin-top: calc(var(--nav-height) + 1rem);
+  }
+
   input,
   textarea,
   select,
@@ -222,16 +226,19 @@
 @media (max-width: 480px) {
   @layer base {
     :root {
-      --text-xs: 0.72rem;
-      --text-sm: 0.84rem;
-      --text-base: 0.95rem;
-      --text-lg: 1rem;
-      --text-xl: 1.08rem;
-      --text-2xl: 1.25rem;
-      --text-3xl: 1.45rem;
-      --text-4xl: 1.7rem;
-      --text-5xl: 1.95rem;
-      --text-6xl: 2.2rem;
+      --text-xs: 0.71rem;
+      --text-sm: 0.83rem;
+      --text-base: 0.94rem;
+      --text-lg: 0.99rem;
+      --text-xl: 1.07rem;
+      --text-2xl: 1.22rem;
+      --text-3xl: 1.4rem;
+      --text-4xl: 1.62rem;
+      --text-5xl: 1.88rem;
+      --text-6xl: 2.1rem;
+      --space-lg: 1.4rem;
+      --space-xl: 1.9rem;
+      --space-2xl: 2.8rem;
     }
   }
 }
@@ -239,6 +246,42 @@
 @layer components {
   .section-padding {
     @apply px-4 py-10 sm:px-6 sm:py-12 md:px-8 md:py-16 lg:px-12 lg:py-20;
+  }
+
+  .premium-panel {
+    @apply rounded-2xl border border-border/80 bg-card;
+    box-shadow:
+      0 18px 44px -28px hsl(var(--primary) / 0.18),
+      inset 0 1px 0 hsl(0 0% 100% / 0.45);
+    transition:
+      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.35s ease,
+      border-color 0.25s ease,
+      background-color 0.25s ease;
+  }
+
+  .premium-pill {
+    @apply inline-flex items-center rounded-full border border-primary/10 bg-background/75;
+    box-shadow: 0 10px 30px -24px hsl(var(--primary) / 0.25);
+  }
+
+  .eyebrow-label {
+    @apply font-body font-semibold uppercase text-primary/80;
+    font-size: var(--text-xs);
+    letter-spacing: 0.18em;
+  }
+
+  .section-title {
+    @apply font-display font-semibold text-foreground;
+    font-size: var(--text-3xl);
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  .section-copy {
+    @apply font-body text-muted-foreground;
+    font-size: var(--text-base);
+    line-height: 1.72;
   }
 
   .glass-card {
@@ -250,6 +293,11 @@
     box-shadow:
       0 4px 30px hsl(var(--primary) / 0.05),
       inset 0 1px 0 hsl(255 100% 100% / 0.1);
+    transition:
+      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.35s ease,
+      border-color 0.25s ease,
+      background-color 0.25s ease;
   }
 
   .glass-card:hover {
@@ -312,6 +360,13 @@
   .card-elevated {
     @apply bg-card rounded-xl;
     box-shadow: var(--shadow-card);
+  }
+
+  .premium-panel:hover {
+    border-color: hsl(var(--primary) / 0.18);
+    box-shadow:
+      0 24px 56px -32px hsl(var(--primary) / 0.26),
+      inset 0 1px 0 hsl(0 0% 100% / 0.55);
   }
 
   .hover-lift {

@@ -94,6 +94,7 @@ const VerifiedReviews = () => {
                     <h2 className="font-display font-bold text-foreground mb-4" style={{ fontSize: "var(--text-3xl)" }}>
                         Trust, Verified by You
                     </h2>
+                    <p className="section-copy max-w-2xl mx-auto mb-5">Customers do not just comment on the taste or texture. They come back because the product and the proof stay aligned.</p>
                     <div className="flex items-center justify-center gap-1.5 mb-2">
                         {[1, 2, 3, 4, 5].map(i => (
                             <Star key={i} className="h-4 w-4 fill-gold text-gold" />
@@ -164,7 +165,8 @@ const VerifiedReviews = () => {
                 </div>
 
                 <ScrollReveal animation="fade-up" delay={500} className="mt-12 sm:mt-20 text-center">
-                    <p className="font-body text-primary text-xs sm:text-sm font-bold uppercase tracking-[0.14em] sm:tracking-widest mb-6">Join the Movement of Informed Consumers</p>
+                    <p className="font-body text-primary text-xs sm:text-sm font-bold uppercase tracking-[0.14em] sm:tracking-widest mb-2">Join the Movement of Informed Consumers</p>
+                    <p className="font-body text-sm text-muted-foreground max-w-xl mx-auto mb-6">WellForged is designed for people who would rather inspect what they buy than simply believe what they are told.</p>
                     <div className="h-px w-24 bg-primary/30 mx-auto" />
                 </ScrollReveal>
             </div>

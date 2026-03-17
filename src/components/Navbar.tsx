@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
 import { ShoppingCart, ArrowLeft } from "lucide-react";
@@ -11,17 +11,17 @@ const Navbar = () => {
 
   const isHomePage = location.pathname === "/" || location.pathname === "";
 
-  useState(() => {
+  useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  });
+  }, []);
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${isScrolled
-        ? "bg-background/80 backdrop-blur-2xl border-border/50 py-2"
-        : "bg-transparent border-transparent py-4"
+        ? "bg-background/85 backdrop-blur-2xl border-border/50 py-2"
+        : "bg-transparent border-transparent py-3"
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,10 +47,10 @@ const Navbar = () => {
                 navigate("/transparency");
                 window.scrollTo(0, 0);
               }}
-              className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300 group"
+              className="hidden sm:flex items-center gap-2 rounded-full border border-primary/20 px-4 py-2 transition-all duration-300 group hover:border-primary/40 hover:bg-primary/5"
             >
               <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              <span className="text-xs font-bold uppercase tracking-wider text-primary">Verify Batch</span>
+              <span className="text-xs font-bold uppercase tracking-[0.16em] text-primary">Verify Batch</span>
             </button>
 
             <button

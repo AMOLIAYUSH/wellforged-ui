@@ -5,39 +5,49 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const ManifestoCTA = () => {
   return (
-    <section className="section-padding bg-secondary relative overflow-hidden pb-24 sm:pb-16 lg:pb-20">
+    <section className="section-padding relative overflow-hidden bg-secondary pb-24 sm:pb-16 lg:pb-20">
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+        <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-border to-transparent" />
+        <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-border to-transparent" />
       </div>
-      <div className="max-w-4xl mx-auto relative z-10 text-center px-1 sm:px-0">
+      <div className="relative z-10 mx-auto max-w-4xl px-1 text-center sm:px-0">
         <ScrollReveal animation="fade-up">
-          <span className="inline-block font-body text-[9px] sm:text-[10px] lg:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] lg:tracking-[0.25em] text-primary/70 mb-2 sm:mb-3 lg:mb-4">Join the Movement</span>
+          <span className="inline-block font-body text-[9px] uppercase tracking-[0.15em] text-primary/70 sm:text-[10px] sm:tracking-[0.2em] lg:text-xs lg:tracking-[0.25em]">
+            Join the Movement
+          </span>
         </ScrollReveal>
         <ScrollReveal animation="fade-up" delay={100}>
-          <h2 className="font-display font-semibold text-foreground mb-3 sm:mb-4 lg:mb-6" style={{ fontSize: "var(--text-3xl)" }}>Ready to Verify?</h2>
+          <h2 className="mb-3 font-display font-semibold text-foreground sm:mb-4 lg:mb-6" style={{ fontSize: "var(--text-3xl)" }}>
+            Ready to Verify?
+          </h2>
         </ScrollReveal>
         <ScrollReveal animation="fade-up" delay={200}>
-          <p className="font-body text-muted-foreground max-w-xl sm:max-w-2xl mx-auto mb-6 sm:mb-8 lg:mb-10 leading-relaxed px-2" style={{ fontSize: "var(--text-base)" }}>Experience the difference that radical transparency makes. Explore our standards or discover our collection.</p>
+          <p className="mx-auto mb-6 max-w-xl px-2 font-body leading-relaxed text-muted-foreground sm:mb-8 sm:max-w-2xl lg:mb-10" style={{ fontSize: "var(--text-base)" }}>
+            Explore the product, inspect the standard, and choose a wellness ritual built on evidence instead of assumption.
+          </p>
         </ScrollReveal>
         <ScrollReveal animation="fade-up" delay={300}>
-          <div className="flex flex-col gap-2.5 sm:flex-row sm:gap-3 lg:gap-4 justify-center">
+          <div className="flex flex-col justify-center gap-2.5 sm:flex-row sm:gap-3 lg:gap-4">
             <Link to="/transparency" onClick={() => window.scrollTo(0, 0)} className="w-full sm:w-auto">
-              <Button variant="hero" size="default" className="group w-full sm:w-auto h-11 gap-2 text-sm sm:text-base border-2 border-transparent hover:border-primary/30 transition-all duration-300">
-                Verify Your Batch<ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+              <Button variant="hero" size="default" className="group h-11 w-full gap-2 border-2 border-transparent text-sm transition-all duration-300 hover:border-primary/30 sm:w-auto sm:text-base">
+                Verify Your Batch
+                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
             </Link>
             <Link to="/product" onClick={() => window.scrollTo(0, 0)} className="w-full sm:w-auto">
-              <Button variant="outline" size="default" className="w-full sm:w-auto h-11 gap-2 text-sm sm:text-base border-2 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300">
-                <ShoppingBag className="h-5 w-5" />View the Collection
+              <Button variant="outline" size="default" className="h-11 w-full gap-2 border-2 text-sm transition-all duration-300 hover:border-primary/50 hover:bg-primary/5 sm:w-auto sm:text-base">
+                <ShoppingBag className="h-5 w-5" />
+                View the Collection
               </Button>
             </Link>
           </div>
         </ScrollReveal>
         <ScrollReveal animation="fade-up" delay={400}>
-          <div className="mt-8 sm:mt-12 lg:mt-16 pt-6 sm:pt-8 lg:pt-10 border-t border-border">
-            <p className="font-display text-foreground italic mb-1.5 sm:mb-2 lg:mb-3" style={{ fontSize: "var(--text-base)" }}>"We test so you don't have to guess."</p>
-            <p className="text-primary" style={{ fontFamily: "'Dancing Script', cursive", fontSize: "var(--text-xl)" }}>— WellForged Team</p>
+          <div className="mt-8 border-t border-border pt-6 sm:mt-12 sm:pt-8 lg:mt-16 lg:pt-10">
+            <p className="mb-2 font-display italic text-foreground" style={{ fontSize: "var(--text-base)" }}>
+              "We test so you do not have to guess."
+            </p>
+            <p className="font-body text-sm font-semibold uppercase tracking-[0.16em] text-primary/80">WellForged Team</p>
           </div>
         </ScrollReveal>
       </div>
