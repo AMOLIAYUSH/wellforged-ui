@@ -4,14 +4,15 @@ import wfLogo from "@/assets/Transparent_logo.png";
 
 const Footer = () => {
   const quickLinks = [
-    { name: "Home", href: "/" },
     { name: "Products", href: "/product" },
     { name: "Transparency", href: "/transparency" },
+    { name: "Contact Us", href: "/contact-us" },
   ];
-  const contactLinks = [
-    { name: "Contact Us", href: "#" },
-    { name: "FAQ", href: "#" },
-    { name: "Privacy Policy", href: "#" },
+  const legalLinks = [
+    { name: "Privacy Policy", href: "/privacy-policy" },
+    { name: "Terms of Service", href: "/terms-of-service" },
+    { name: "Refund Policy", href: "/refund-policy" },
+    { name: "Shipping Policy", href: "/shipping-policy" },
   ];
   const socialLinks = [
     { icon: Instagram, href: "#", label: "Instagram" },
@@ -41,7 +42,7 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-            <h4 className="mb-1.5 font-display text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground sm:mb-2 sm:text-xs">Quick Links</h4>
+            <h4 className="mb-1.5 font-display text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground sm:mb-2 sm:text-xs">Company</h4>
             <ul className="space-y-[var(--space-2xs)] text-center lg:text-left">
               {quickLinks.map((link) => (
                 <li key={link.name}>
@@ -59,35 +60,42 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-            <h4 className="mb-1.5 font-display text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground sm:mb-2 sm:text-xs">Contact</h4>
-            <ul className="space-y-1.5 text-center lg:text-left sm:space-y-2">
-              {contactLinks.map((link) => (
+            <h4 className="mb-1.5 font-display text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground sm:mb-2 sm:text-xs">Legal</h4>
+            <ul className="space-y-[var(--space-2xs)] text-center lg:text-left">
+              {legalLinks.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="inline-block py-1.5 font-body text-muted-foreground transition-colors hover:text-foreground"
+                  <Link
+                    to={link.href}
+                    onClick={() => window.scrollTo(0, 0)}
+                    className="inline-block py-1 font-body text-muted-foreground transition-colors hover:text-foreground"
                     style={{ fontSize: "var(--text-sm)" }}
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="hidden lg:block" />
+          <div className="hidden lg:block text-right">
+             <p className="font-body text-[11px] text-muted-foreground mb-1">Support: hello@wellforged.in</p>
+             <p className="font-body text-[10px] text-muted-foreground">Mon - Fri, 10am - 6pm IST</p>
+          </div>
         </div>
 
         <div className="mt-3 border-t border-border pt-3 sm:mt-6 sm:pt-4">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-6">
               <p className="font-body text-[9px] text-muted-foreground sm:text-[10px]">© {new Date().getFullYear()} WellForged. All rights reserved.</p>
-              <p className="rounded border border-border/50 bg-muted/50 px-2 py-0.5 font-mono text-[9px] text-muted-foreground">FSSAI Lic. No. 1002XXXXXXXXXX</p>
+              <div className="flex gap-4">
+                <p className="rounded border border-border/50 bg-muted/50 px-2 py-0.5 font-mono text-[9px] text-muted-foreground">GSTIN: PENDING</p>
+                <p className="rounded border border-border/50 bg-muted/50 px-2 py-0.5 font-mono text-[9px] text-muted-foreground">FSSAI: PENDING</p>
+              </div>
             </div>
             <div className="flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-2 py-0.5">
               <Shield className="h-3 w-3 text-primary" />
               <CheckCircle className="h-2.5 w-2.5 text-primary" />
-              <span className="font-body text-[9px] font-medium text-primary">Secure & Verified</span>
+              <span className="font-body text-[9px] font-medium text-primary">Secure & Verified Checkout</span>
             </div>
           </div>
         </div>

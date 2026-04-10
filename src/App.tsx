@@ -20,6 +20,8 @@ const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const RefundPolicy = lazy(() => import("./pages/RefundPolicy"));
+const ShippingPolicy = lazy(() => import("./pages/ShippingPolicy"));
+const ContactUs = lazy(() => import("./pages/ContactUs"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 const queryClient = new QueryClient();
@@ -61,6 +63,8 @@ const App = () => (
                                         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                                         <Route path="/terms-of-service" element={<TermsOfService />} />
                                         <Route path="/refund-policy" element={<RefundPolicy />} />
+                                        <Route path="/shipping-policy" element={<ShippingPolicy />} />
+                                        <Route path="/contact-us" element={<ContactUs />} />
                                         <Route path="/order-success" element={<OrderSuccessPage />} />
                                         <Route path="/admin" element={
                                             <ProtectedRoute requiredRole="admin">

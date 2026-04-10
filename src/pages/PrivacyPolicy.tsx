@@ -12,27 +12,50 @@ const PrivacyPolicy = () => {
             <main className="pt-24 pb-16 min-h-screen bg-[#fcfdfc]">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h1 className="font-display font-bold text-3xl sm:text-4xl text-foreground mb-8">Privacy Policy</h1>
-                    <div className="prose prose-slate max-w-none font-body text-muted-foreground space-y-6">
-                        <p>Last Updated: February 18, 2026</p>
+                    <div className="prose prose-slate max-w-none font-body text-muted-foreground space-y-8">
                         <section className="space-y-4">
-                            <h2 className="text-xl font-display font-semibold text-foreground">1. Information We Collect</h2>
-                            <p>We receive, collect and store any information you enter on our website or provide us in any other way. In addition, we collect the Internet protocol (IP) address used to connect your computer to the Internet; login; e-mail address; password; computer and connection information and purchase history.</p>
+                            <p>Last Updated: April 10, 2026</p>
+                            <p>WellForged ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how your personal information is collected, used, and disclosed by WellForged.</p>
+                            <p>By accessing or using our Service, you signify that you have read, understood, and agree to our collection, storage, use, and disclosure of your personal information as described in this Privacy Policy and our Terms of Service.</p>
                         </section>
+
                         <section className="space-y-4">
-                            <h2 className="text-xl font-display font-semibold text-foreground">2. How We Use Information</h2>
-                            <p>We collect such Non-personal and Personal Information for the following purposes:</p>
+                            <h2 className="text-xl font-display font-semibold text-foreground">1. What Information Do We Collect?</h2>
+                            <p>We collect information from you when you visit our service, register, place an order, subscribe to our newsletter, respond to a survey or fill out a form.</p>
                             <ul className="list-disc pl-6 space-y-2">
-                                <li>To provide and operate the Services;</li>
-                                <li>To provide our Users with ongoing customer assistance and technical support;</li>
-                                <li>To be able to contact our Visitors and Users with general or personalized service-related notices and promotional messages;</li>
-                                <li>To comply with any applicable laws and regulations.</li>
+                                <li>Name / Username</li>
+                                <li>Phone Numbers</li>
+                                <li>Email Addresses</li>
+                                <li>Mailing Addresses</li>
+                                <li>Billing Addresses</li>
+                                <li>Debit/credit card numbers (processed securely via our payment partners)</li>
                             </ul>
                         </section>
+
                         <section className="space-y-4">
-                            <h2 className="text-xl font-display font-semibold text-foreground">3. Security</h2>
-                            <p>We take security seriously and implement industry-standard precautions to maintain the integrity and confidentiality of your data. However, no method of transmission over the Internet is 100% secure.</p>
+                            <h2 className="text-xl font-display font-semibold text-foreground">2. How Do We Use Your Information?</h2>
+                            <p>Any of the information we collect from you may be used in one of the following ways:</p>
+                            <ul className="list-disc pl-6 space-y-2">
+                                <li>To personalize your experience (your information helps us to better respond to your individual needs)</li>
+                                <li>To improve our service (we continually strive to improve our offerings based on the information and feedback we receive from you)</li>
+                                <li>To improve customer service (your information helps us to more effectively respond to your customer service requests and support needs)</li>
+                                <li>To process transactions</li>
+                                <li>To send periodic emails and updates regarding your orders</li>
+                            </ul>
                         </section>
-                        <p className="pt-8">If you have any questions about this Privacy Policy, please contact us at support@wellforged.in</p>
+
+                        <section className="space-y-4">
+                            <h2 className="text-xl font-display font-semibold text-foreground">3. Third-Party Sharing</h2>
+                            <p>We do not sell, trade, or otherwise transfer to outside parties your personally identifiable information. This does not include trusted third parties who assist us in operating our website, conducting our business, or servicing you, so long as those parties agree to keep this information confidential.</p>
+                            <p>We use **Razorpay** for processing payments. We/Razorpay do not store your card data on their servers. The data is encrypted through the Payment Card Industry Data Security Standard (PCI-DSS) when processing payment.</p>
+                        </section>
+
+                        <section className="space-y-4">
+                            <h2 className="text-xl font-display font-semibold text-foreground">4. Security</h2>
+                            <p>We implement a variety of security measures to maintain the safety of your personal information when you place an order or enter, submit, or access your personal information.</p>
+                        </section>
+
+                        <p className="pt-8 italic text-foreground">If you have any questions about this Privacy Policy, please contact us at hello@wellforged.in</p>
                     </div>
                 </div>
             </main>
