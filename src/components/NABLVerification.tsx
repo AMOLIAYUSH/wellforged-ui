@@ -49,7 +49,7 @@ const NABLVerification = () => {
               Independent NABL Verification
             </h2>
             <p className="font-body text-[var(--text-base)] sm:text-[var(--text-lg)] text-muted-foreground max-w-xl sm:max-w-2xl mx-auto leading-relaxed px-2">
-              Every batch undergoes rigorous third-party testing at NABL-accredited laboratories. We do not ask you to assume purity. We show you the report behind it.
+              Every batch undergoes independent testing at NABL-accredited laboratories. We do not ask you to assume purity. We show you the record behind it.
             </p>
           </div>
         </ScrollReveal>
@@ -91,7 +91,7 @@ const NABLVerification = () => {
                   <h3 className="font-display text-base sm:text-lg lg:text-xl font-semibold text-foreground mb-0.5 sm:mb-1">NABL Accredited Testing</h3>
                   <p className="font-body text-xs sm:text-sm text-muted-foreground">National Accreditation Board for Testing and Calibration Laboratories</p>
                   <p className="font-body text-[11px] sm:text-xs text-foreground/80 mt-1">
-                    The same proof standard that lets you verify the batch you actually receive.
+                    The same proof standard that lets you verify the batch you actually receive, not a generic certificate.
                   </p>
                 </div>
               </div>

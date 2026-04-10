@@ -4,19 +4,9 @@ import { Star, CheckCircle2, Quote, ChevronLeft, ChevronRight } from "lucide-rea
 import useEmblaCarousel from "embla-carousel-react";
 import ScrollReveal from "./ScrollReveal";
 import { API_BASE_URL } from "@/config";
+import type { ReviewData } from "@/types/store";
 
-interface Review {
-    name?: string;
-    user_name?: string;
-    location?: string;
-    rating: number;
-    text?: string;
-    comment?: string;
-    highlight: string;
-    is_verified?: boolean;
-}
-
-const STATIC_REVIEWS: Review[] = [
+const STATIC_REVIEWS: ReviewData[] = [
     {
         name: "Dr. Ananya S.",
         location: "Bengaluru",
@@ -48,14 +38,13 @@ const STATIC_REVIEWS: Review[] = [
 ];
 
 const VerifiedReviews = () => {
-    const { data: dynamicReviews } = useQuery<Review[]>({
+    const { data: dynamicReviews } = useQuery<ReviewData[]>({
         queryKey: ['reviews', 'moringa-powder'],
         queryFn: async () => {
             const res = await fetch(`${API_BASE_URL}/api/reviews?slug=moringa-powder`);
             if (!res.ok) throw new Error('Failed to fetch reviews');
-            const data = await res.json();
-            // Map 'name' to 'user_name' and 'text' to 'comment' if they exist in the fetched data
-            return data.map((review: any) => ({
+            const data = (await res.json()) as ReviewData[];
+            return data.map((review) => ({
                 ...review,
                 user_name: review.user_name || review.name,
                 comment: review.comment || review.text,
@@ -108,7 +97,7 @@ const VerifiedReviews = () => {
                     <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
                         <div className="flex gap-6 lg:gap-8">
                             {reviews.map((review, index) => (
-                                <div key={review.name} className="flex-[0_0_100%] md:flex-[0_0_48%] lg:flex-[0_0_31%] min-w-0">
+                                <div key={`${review.user_name || review.name || "review"}-${index}`} className="flex-[0_0_100%] md:flex-[0_0_48%] lg:flex-[0_0_31%] min-w-0">
                                     <div className="glass-card hover-lift p-6 sm:p-8 h-full flex flex-col bg-background/40 backdrop-blur-md relative overflow-hidden group">
                                         <div className="absolute -top-4 -left-4 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity text-foreground">
                                             <Quote className="h-24 w-24 rotate-12" />

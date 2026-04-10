@@ -16,7 +16,7 @@ const steps = [
     title: "Forging",
     subtitle: "Cold-Processed Integrity",
     description:
-      "Unlike heat-treated products, we process below 40C to preserve heat-sensitive nutrients and chlorophyll. The result is a cleaner, more disciplined ingredient.",
+      "Unlike heat-treated products, we process below 40C to preserve heat-sensitive nutrients and chlorophyll. The result is a cleaner ingredient with less compromise built in.",
     icon: FlaskConical,
   },
   {
@@ -24,7 +24,7 @@ const steps = [
     title: "Transparency",
     subtitle: "Real-Time Batch Reporting",
     description:
-      "Scan your product batch code to access complete lab results instantly. No hidden data. No gatekeeping. Full disclosure.",
+      "Scan your batch code to access the report behind the product in your hand. No hidden data. No gatekeeping. Full disclosure.",
     icon: FileSearch,
   },
 ];
@@ -78,7 +78,7 @@ const ProcessTimeline = () => {
             From Source to Certainty
           </h2>
           <p className="section-copy mx-auto mt-3 max-w-2xl">
-            A premium standard is not created by packaging alone. It is built through process, verification, and disclosure at every step.
+            A premium standard is not created by packaging alone. It is built through disciplined process, independent verification, and disclosure at every step.
           </p>
         </ScrollReveal>
         <div className="relative">

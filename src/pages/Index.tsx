@@ -1,36 +1,59 @@
-import { Helmet } from "react-helmet-async";
+import { Suspense, lazy } from "react";
+import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import ManifestoHero from "@/components/ManifestoHero";
-import IntegrityPillars from "@/components/IntegrityPillars";
-import TrustComparison from "@/components/TrustComparison";
-import WhyWeExist from "@/components/WhyWeExist";
-import TamilNaduTerroir from "@/components/TamilNaduTerroir";
-import NABLVerification from "@/components/NABLVerification";
-import ProcessTimeline from "@/components/ProcessTimeline";
-import VerifiedReviews from "@/components/VerifiedReviews";
-import ManifestoCTA from "@/components/ManifestoCTA";
 import Footer from "@/components/Footer";
 import StickyBuyButton from "@/components/StickyBuyButton";
+
+const TrustComparison = lazy(() => import("@/components/TrustComparison"));
+const NABLVerification = lazy(() => import("@/components/NABLVerification"));
+const IntegrityPillars = lazy(() => import("@/components/IntegrityPillars"));
+const ProcessTimeline = lazy(() => import("@/components/ProcessTimeline"));
+const TamilNaduTerroir = lazy(() => import("@/components/TamilNaduTerroir"));
+const WhyWeExist = lazy(() => import("@/components/WhyWeExist"));
+const VerifiedReviews = lazy(() => import("@/components/VerifiedReviews"));
+const ManifestoCTA = lazy(() => import("@/components/ManifestoCTA"));
+
+const SectionFallback = () => (
+    <div className="section-padding bg-background">
+        <div className="mx-auto max-w-6xl">
+            <div className="premium-panel h-56 animate-pulse bg-secondary/50" />
+        </div>
+    </div>
+);
 
 const Index = () => {
     return (
         <>
-            <Helmet>
-                <title>WellForged | Wellness, Forged with Integrity</title>
-                <meta name="description" content="Most brands ask for your trust. We provide the proof. Welcome to the new standard of radical transparency in wellness." />
-                <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet" />
-            </Helmet>
+            <SEO 
+                title="Radically Transparent Wellness Supplements"
+                description="Most brands ask for your trust. Wellforged provides the proof. Welcome to the new standard of radical transparency in pure, lab-tested wellness."
+                canonical="https://wellforged.in"
+                jsonLd={{
+                    "@context": "https://schema.org",
+                    "@type": "WebSite",
+                    "url": "https://wellforged.in",
+                    "name": "Wellforged",
+                    "potentialAction": {
+                        "@type": "SearchAction",
+                        "target": "https://wellforged.in/product?search={search_term_string}",
+                        "query-input": "required name=search_term_string"
+                    }
+                }}
+            />
             <main className="min-h-screen page-pt">
                 <Navbar />
                 <ManifestoHero />
-                <IntegrityPillars />
-                <TrustComparison />
-                <WhyWeExist />
-                <TamilNaduTerroir />
-                <NABLVerification />
-                <ProcessTimeline />
-                <VerifiedReviews />
-                <ManifestoCTA />
+                <Suspense fallback={<SectionFallback />}>
+                    <TrustComparison />
+                    <NABLVerification />
+                    <IntegrityPillars />
+                    <ProcessTimeline />
+                    <TamilNaduTerroir />
+                    <WhyWeExist />
+                    <VerifiedReviews />
+                    <ManifestoCTA />
+                </Suspense>
                 <Footer />
                 <StickyBuyButton />
             </main>

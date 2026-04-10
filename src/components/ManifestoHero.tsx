@@ -4,14 +4,15 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import AnimatedLogo from "@/components/AnimatedLogo";
 
+const HERO_WORDS = ["Wellness,", "Forged", "with", "Integrity."];
+
 const ManifestoHero = () => {
   const [visibleWords, setVisibleWords] = useState(0);
-  const words = ["Wellness,", "Forged", "with", "Integrity."];
 
   useEffect(() => {
     const timer = setInterval(() => {
       setVisibleWords((prev) => {
-        if (prev >= words.length) { clearInterval(timer); return prev; }
+        if (prev >= HERO_WORDS.length) { clearInterval(timer); return prev; }
         return prev + 1;
       });
     }, 200);
@@ -40,7 +41,7 @@ const ManifestoHero = () => {
         </div>
 
         <h1 className="font-display font-semibold text-foreground leading-[1.08] sm:leading-[1.04] mb-4 sm:mb-[var(--space-md)]" style={{ fontSize: "var(--text-5xl)", textWrap: "balance" } as React.CSSProperties}>
-          {words.map((word, index) => (
+          {HERO_WORDS.map((word, index) => (
             <span key={index} className={`inline-block transition-all duration-700 mr-[0.25em] last:mr-0 py-1 ${index < visibleWords ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${word === "Integrity." ? "text-gold-gradient drop-shadow-sm" : ""}`} style={{ transitionDelay: `${index * 150}ms` }}>
               {word}
             </span>
@@ -49,14 +50,14 @@ const ManifestoHero = () => {
 
         <div className="animate-hero-fade-up-delay-3 max-w-lg sm:max-w-xl lg:max-w-2xl mx-auto">
           <p className="font-body text-[0.96rem] sm:text-[var(--text-lg)] text-muted-foreground leading-[1.75] mb-3 sm:mb-4">
-            Most brands ask for your trust. <span className="text-foreground font-semibold">We publish the proof.</span>
+            Most brands ask for your trust. <span className="text-foreground font-semibold">We let you inspect the proof before you commit.</span>
           </p>
           <p className="font-body text-[0.9rem] sm:text-[var(--text-base)] text-muted-foreground/90 leading-[1.7] mb-6 sm:mb-[var(--space-lg)] max-w-xl mx-auto">
-            Single-origin sourcing, third-party testing, and batch-level verification for wellness you can inspect before it reaches your shelf.
+            Single-origin sourcing, independent testing, and batch-level verification for a ritual that feels measured, not marketed.
           </p>
 
           <div className="mb-5 sm:mb-7 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
-            <span className="premium-pill px-3 py-1.5 text-[0.68rem] sm:text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-primary">Lab-Tested</span>
+            <span className="premium-pill px-3 py-1.5 text-[0.68rem] sm:text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-primary">Third-Party Tested</span>
             <span className="premium-pill px-3 py-1.5 text-[0.68rem] sm:text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-primary">Single Ingredient</span>
             <span className="premium-pill px-3 py-1.5 text-[0.68rem] sm:text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-primary">Batch Verified</span>
           </div>

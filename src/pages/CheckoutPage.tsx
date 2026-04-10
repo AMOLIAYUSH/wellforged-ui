@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { API_BASE_URL } from "@/config";
+import type { CouponValidationResult } from "@/types/store";
 
 const getSuggestedCoupon = (subtotal: number) => {
   if (subtotal >= 1500) return { code: "SAVE100", discount: 100, minSubtotal: 1500 };
@@ -23,7 +24,7 @@ const CheckoutPage = () => {
   const navigate = useNavigate();
 
   const [couponCode, setCouponCode] = useState("");
-  const [appliedCoupon, setAppliedCoupon] = useState<any>(null);
+  const [appliedCoupon, setAppliedCoupon] = useState<CouponValidationResult | null>(null);
   const [isValidatingCoupon, setIsValidatingCoupon] = useState(false);
   const [couponHelper, setCouponHelper] = useState("");
   const [step, setStep] = useState(1);
@@ -101,7 +102,7 @@ const CheckoutPage = () => {
   const handlePlaceOrder = async () => {
     setIsSubmitting(true);
     try {
-      const payload: any = {
+      const payload = {
         coupon_id: appliedCoupon?.coupon_id || null,
         idempotency_key: idempotencyKey,
         guest_details: {
@@ -130,8 +131,9 @@ const CheckoutPage = () => {
       toast.success("Order placed successfully!");
       clearCart();
       navigate("/order-success");
-    } catch (error: any) {
-      toast.error(error.message || "Something went wrong");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Something went wrong";
+      toast.error(message);
     } finally {
       setIsSubmitting(false);
     }

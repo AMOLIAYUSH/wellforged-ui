@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useCart } from "@/context/CartContext";
 import { Link } from "react-router-dom";
+import { DEFAULT_PRODUCT_IMAGE, imageErrorFallback } from "@/utils/images";
 
 const CartDrawer = () => {
   const { items, isOpen, setIsOpen, updateQuantity, removeItem, subtotal, totalItems } = useCart();
@@ -36,13 +37,10 @@ const CartDrawer = () => {
                 <div key={item.id} className="flex gap-3 rounded-xl border border-border bg-card p-3 shadow-[0_14px_28px_-24px_hsl(var(--primary)/0.35)]">
                   <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg bg-secondary">
                     <img
-                      src={item.image || "/Packaging_Updated.png"}
+                      src={DEFAULT_PRODUCT_IMAGE}
                       alt={item.name}
                       className="h-full w-full object-contain"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.src = "/Packaging_Updated.png";
-                      }}
+                      onError={imageErrorFallback}
                     />
                   </div>
                   <div className="flex-1">

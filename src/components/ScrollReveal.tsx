@@ -16,6 +16,7 @@ const ScrollReveal = ({
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const node = elementRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -33,13 +34,13 @@ const ScrollReveal = ({
       }
     );
 
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
+    if (node) {
+      observer.observe(node);
     }
 
     return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current);
+      if (node) {
+        observer.unobserve(node);
       }
     };
   }, [delay]);

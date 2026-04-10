@@ -8,13 +8,11 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requiredRole }) => {
-    const { isLoggedIn, user, setRedirectUrl } = useAuth();
+    const { isLoggedIn, user } = useAuth();
     const location = useLocation();
 
     if (!isLoggedIn) {
-        // Store the current URL for redirect after login
-        setRedirectUrl(location.pathname + location.search);
-        return <Navigate to="/auth" replace />;
+        return <Navigate to="/" replace state={{ from: location.pathname + location.search }} />;
     }
 
     if (requiredRole && user?.role !== requiredRole) {

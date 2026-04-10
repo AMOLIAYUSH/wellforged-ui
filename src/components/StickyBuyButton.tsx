@@ -25,7 +25,7 @@ const StickyBuyButton = () => {
       <div className="mx-auto flex max-w-md items-center gap-3">
         <div className="min-w-0 flex-1">
           <p className="truncate font-display text-base text-foreground">Moringa Powder</p>
-          <p className="mt-0.5 font-body text-xs text-muted-foreground">Single-ingredient, batch-verified daily greens.</p>
+          <p className="mt-0.5 font-body text-xs text-muted-foreground">Single-ingredient daily greens with a batch report behind every pack.</p>
         </div>
         <Button
           variant="hero"
@@ -34,7 +34,7 @@ const StickyBuyButton = () => {
           onClick={() => navigate("/product")}
         >
           <ShoppingCart className="h-4 w-4" />
-          Shop
+          View Product
         </Button>
       </div>
     </div>

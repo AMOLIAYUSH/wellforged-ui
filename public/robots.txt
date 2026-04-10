@@ -1,7 +1,6 @@
+# Standard robots.txt for WellForged
 User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /profile
-Disallow: /checkout
 
+# Sitemap location
 Sitemap: https://wellforged.in/sitemap.xml

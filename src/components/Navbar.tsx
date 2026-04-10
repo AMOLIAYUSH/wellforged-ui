@@ -29,15 +29,17 @@ const Navbar = () => {
 
           {/* LEFT: BACK BUTTON (Internal Pages Only) */}
           <div className="flex-1 flex items-center min-w-0">
-            {!isHomePage && (
+
+ {!isHomePage && (
               <button
-                onClick={() => navigate(-1)}
+                onClick={() => navigate("/")}
                 className="h-10 w-10 lg:h-12 lg:w-12 flex items-center justify-center rounded-full hover:bg-muted border border-border transition-colors group"
-                aria-label="Go back"
+                aria-label="Go home"
               >
                 <ArrowLeft className="h-5 w-5 lg:h-6 lg:w-6 text-foreground/70 group-hover:text-primary transition-colors" />
               </button>
             )}
+
           </div>
 
           {/* RIGHT SECTION: Transparency + Cart */}

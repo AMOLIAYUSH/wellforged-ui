@@ -1,7 +1,5 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
-import { useAuth } from "./AuthContext";
 import { trackEvent } from "@/utils/analytics";
-import { API_BASE_URL } from "@/config";
 
 export interface CartItem {
   id: string;

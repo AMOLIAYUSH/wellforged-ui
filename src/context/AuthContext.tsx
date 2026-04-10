@@ -2,28 +2,17 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 
 interface User {
     id: string;
-    mobile_number: string;
-    first_name: string;
-    last_name?: string;
+    full_name?: string;
     email: string;
     role: string;
-}
-
-interface PendingCartAction {
-    sku: string;
-    action: "add";
 }
 
 interface AuthContextType {
     isLoggedIn: boolean;
     user: User | null;
-    redirectUrl: string | null;
-    pendingCartAction: PendingCartAction | null;
     token: string | null;
     login: (token: string, user: User) => void;
     logout: () => void;
-    setRedirectUrl: (url: string | null) => void;
-    setPendingCartAction: (action: PendingCartAction | null) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -32,28 +21,39 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [user, setUser] = useState<User | null>(null);
     const [token, setToken] = useState<string | null>(null);
-    const [redirectUrl, setRedirectUrl] = useState<string | null>(null);
-    const [pendingCartAction, setPendingCartAction] = useState<PendingCartAction | null>(null);
 
-    // Every visit is stateless: do not load from localStorage
+    // Frontend customer auth is disabled; retain only minimal admin session support.
     useEffect(() => {
-        // Session loading disabled for Ephemeral Guest model
+        const storedToken = localStorage.getItem("wellforged_admin_token");
+        const storedUser = localStorage.getItem("wellforged_admin_user");
+
+        if (storedToken && storedUser) {
+            try {
+                setToken(storedToken);
+                setUser(JSON.parse(storedUser) as User);
+                setIsLoggedIn(true);
+            } catch (error) {
+                console.error("Failed to restore admin session:", error);
+                localStorage.removeItem("wellforged_admin_token");
+                localStorage.removeItem("wellforged_admin_user");
+            }
+        }
     }, []);
 
     const login = (token: string, user: User) => {
         setIsLoggedIn(true);
         setUser(user);
         setToken(token);
-        // Persistence disabled
+        localStorage.setItem("wellforged_admin_token", token);
+        localStorage.setItem("wellforged_admin_user", JSON.stringify(user));
     };
 
     const logout = () => {
         setIsLoggedIn(false);
         setUser(null);
         setToken(null);
-        setRedirectUrl(null);
-        setPendingCartAction(null);
-        // Persistence disabled
+        localStorage.removeItem("wellforged_admin_token");
+        localStorage.removeItem("wellforged_admin_user");
     };
 
     return (
@@ -62,12 +62,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 isLoggedIn,
                 user,
                 token,
-                redirectUrl,
-                pendingCartAction,
                 login,
                 logout,
-                setRedirectUrl,
-                setPendingCartAction,
             }}
         >
             {children}

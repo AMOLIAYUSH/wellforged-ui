@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import { useNavigate } from "react-router-dom";
 import { Check, Leaf, Shield, FlaskConical, QrCode, Globe, CheckCircle, ChevronLeft, ChevronRight, Sparkles, Clock3, HeartHandshake } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -8,14 +8,27 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ProductSelector from "@/components/ProductSelector";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { API_BASE_URL } from "@/config";
+import type { HighlightPill, ProductData } from "@/types/store";
 import productImage1 from "@/assets/product-carousel-1.jpg";
 import productImage2 from "@/assets/product-carousel-2.jpg";
 import productImage3 from "@/assets/product-carousel-3.jpg";
 import productImage4 from "@/assets/product-carousel-4.jpg";
 import productImage5 from "@/assets/product-carousel-5.jpg";
+import { imageErrorFallback } from "@/utils/images";
+
+interface TechnicalSpecDetail {
+  label: string;
+  value: string;
+}
+
+interface TechnicalSpecGroup {
+  icon: typeof Globe;
+  title: string;
+  details: TechnicalSpecDetail[];
+}
 
 const ProductPage = () => {
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState<ProductData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -31,7 +44,7 @@ const ProductPage = () => {
       try {
         const response = await fetch(`${API_BASE_URL}/api/products/${slug}`);
         if (response.ok) {
-          const data = await response.json();
+          const data = (await response.json()) as ProductData;
           setProduct(data);
         }
       } catch (error) {
@@ -52,8 +65,7 @@ const ProductPage = () => {
   };
 
   const carouselImages = [productImage1, productImage2, productImage3, productImage4, productImage5];
-  const backendImages = product?.images?.map((img: any) => img.image_url) || [];
-  const productImages = [...carouselImages, ...backendImages].filter((v, i, a) => a.indexOf(v) === i);
+  const productImages = carouselImages;
 
   const startAutoPlay = useCallback(() => {
     if (autoPlayRef.current) clearInterval(autoPlayRef.current);
@@ -83,13 +95,19 @@ const ProductPage = () => {
   const onTouchEnd = (e: React.TouchEvent) => {
     touchEndX.current = e.changedTouches[0].screenX;
     const diff = touchStartX.current - touchEndX.current;
-    if (Math.abs(diff) > 40) diff > 0 ? nextImage() : prevImage();
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        nextImage();
+      } else {
+        prevImage();
+      }
+    }
   };
 
-  const trustHighlights =
+  const trustHighlights: HighlightPill[] =
     product?.metadata
-      ?.filter((m: any) => m.category === "highlight")
-      .map((m: any) => ({
+      ?.filter((m) => m.category === "highlight")
+      .map((m) => ({
         icon: m.icon_name === "Leaf" ? Leaf : m.icon_name === "Shield" ? Shield : m.icon_name === "FlaskConical" ? FlaskConical : CheckCircle,
         label: m.key,
       })) || [
@@ -101,18 +119,18 @@ const ProductPage = () => {
 
   const ingredients =
     product?.metadata
-      ?.filter((m: any) => m.category === "ingredient")
-      .map((m: any) => ({
+      ?.filter((m) => m.category === "ingredient")
+      .map((m) => ({
         icon: Leaf,
         name: m.key,
       })) || [{ icon: Leaf, name: "Moringa Oleifera" }];
 
-  const specs = product?.metadata?.filter((m: any) => m.category === "spec") || [];
-  const technicalSpecs = {
+  const specs = product?.metadata?.filter((m) => m.category === "spec") || [];
+  const technicalSpecs: Record<string, TechnicalSpecGroup> = {
     overview: {
       icon: Globe,
       title: "Technical Overview",
-      details: specs.map((s: any) => ({ label: s.key, value: s.value })),
+      details: specs.map((s) => ({ label: s.key, value: s.value })),
     },
   };
 
@@ -147,18 +165,46 @@ const ProductPage = () => {
     );
   }
 
+  const productName = product?.name || "Pure Moringa Leaf Powder";
+  const productDescription = product?.base_description || "Wellforged Moringa Leaf Powder - Clean, single-ingredient moringa powder crafted with disciplined sourcing and verified lab quality.";
+  const canonicalUrl = `https://wellforged.in/product/${slug}`;
+
+  // SEO Rectification: Brand-First Title
+  const seoTitle = `${productName} | Clean Single-Ingredient Wellness`;
+
   return (
     <>
-      <Helmet>
-        <title>{product?.name || "WellForged Moringa Leaf Powder"} | Clean Single-Ingredient Wellness</title>
-        <meta
-          name="description"
-          content={
-            product?.base_description ||
-            "WellForged Moringa Leaf Powder - Clean, single-ingredient moringa powder crafted with disciplined sourcing, careful processing, and verified quality."
+      <SEO 
+        title={seoTitle}
+        description={productDescription}
+        canonical={canonicalUrl}
+        ogType="product"
+        ogImage="https://wellforged.in/assets/Packaging_Updated.png"
+        jsonLd={{
+          "@context": "https://schema.org/",
+          "@type": "Product",
+          "name": `Wellforged ${productName}`, // Explicit brand prefix in schema
+          "image": [
+            "https://wellforged.in/assets/product-carousel-1.jpg",
+            "https://wellforged.in/assets/Packaging_Updated.png"
+          ],
+          "description": productDescription,
+          "sku": slug,
+          "mpn": "WF-MOR-01",
+          "brand": {
+            "@type": "Brand",
+            "name": "Wellforged"
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": canonicalUrl,
+            "priceCurrency": "INR",
+            "price": "499",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition"
           }
-        />
-      </Helmet>
+        }}
+      />
 
       <Navbar />
       <main className="min-h-screen bg-background pb-20 pt-16 sm:pb-0 sm:pt-20">
@@ -196,8 +242,9 @@ const ProductPage = () => {
                       </button>
 
                       <div
-                        className="flex h-full transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
+                        className="flex h-full transition-transform duration-500 ease-out"
                         style={{
+                          transitionTimingFunction: "cubic-bezier(0.25, 1, 0.5, 1)",
                           transform: `translateX(-${currentImageIndex * (100 / productImages.length)}%)`,
                           width: `${productImages.length * 100}%`,
                         }}
@@ -206,9 +253,10 @@ const ProductPage = () => {
                           <div key={i} className="h-full flex-shrink-0" style={{ width: `${100 / productImages.length}%` }}>
                             <img
                               src={img}
-                              alt={`${product?.name || "Product"} - view ${i + 1}`}
+                              alt={`Wellforged ${product?.name || "Product"} - Detailed View ${i + 1}`}
                               loading={i === 0 ? "eager" : "lazy"}
                               className="h-full w-full object-contain p-6 sm:p-10"
+                              onError={imageErrorFallback}
                             />
                           </div>
                         ))}
@@ -221,13 +269,18 @@ const ProductPage = () => {
                           <button
                             key={i}
                             onClick={() => goTo(i)}
-                            aria-label={`Product image ${i + 1}`}
+                            aria-label={`Wellforged product thumbnail ${i + 1}`}
                             className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
                               i === currentImageIndex ? "border-primary shadow-[0_12px_24px_-18px_hsl(var(--primary)/0.45)]" : "border-border/80 opacity-75 hover:opacity-100"
                             }`}
                           >
                             <div className="aspect-square bg-[#f6f8f5] p-1.5">
-                              <img src={img} alt={`${product?.name || "Product"} thumbnail ${i + 1}`} className="h-full w-full object-contain" />
+                              <img
+                                src={img}
+                                alt={`Wellforged ${product?.name || "Product"} Preview ${i + 1}`}
+                                className="h-full w-full object-contain"
+                                onError={imageErrorFallback}
+                              />
                             </div>
                           </button>
                         ))}
@@ -240,16 +293,16 @@ const ProductPage = () => {
               <div className="space-y-4 sm:space-y-5 lg:space-y-6">
                 <ScrollReveal animation="fade-left">
                   <div className="mb-2 space-y-3">
-                    <span className="eyebrow-label">Single-Ingredient Wellness</span>
+                    <span className="eyebrow-label text-primary font-bold">Wellforged Standard</span>
                     <h1 className="font-display text-foreground" style={{ fontSize: "clamp(1.9rem, 5vw, 2.9rem)", lineHeight: 1.05 }}>
-                      {product?.name || "WellForged Moringa Powder"}
+                      {product?.name || "Pure Moringa Powder"}
                     </h1>
                     <p className="max-w-xl font-body text-muted-foreground" style={{ fontSize: "var(--text-base)", lineHeight: 1.72 }}>
                       {product?.base_description ||
                         "Pure, nutrient-rich moringa powder lab tested, free from fillers, and crafted to deliver clean daily nourishment."}
                     </p>
                     <div className="flex flex-wrap gap-2 pt-1">
-                      {trustHighlights.slice(0, 3).map(({ icon: Icon, label }: any) => (
+                      {trustHighlights.slice(0, 3).map(({ icon: Icon, label }) => (
                         <span key={label} className="premium-pill gap-2 px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-primary sm:text-[0.72rem]">
                           <Icon className="h-3.5 w-3.5" />
                           {label}
@@ -317,7 +370,7 @@ const ProductPage = () => {
             </ScrollReveal>
             <div className="mx-auto max-w-4xl">
               <Accordion type="single" collapsible className="space-y-4">
-                {Object.values(technicalSpecs).map((spec: any, index: number) => (
+                {Object.values(technicalSpecs).map((spec, index) => (
                   <AccordionItem key={spec.title} value={`spec-${index}`} className="premium-panel px-4 sm:px-6">
                     <AccordionTrigger className="group py-4 hover:no-underline sm:py-6">
                       <div className="flex items-center gap-3 text-left sm:gap-4">
@@ -332,7 +385,7 @@ const ProductPage = () => {
                     </AccordionTrigger>
                     <AccordionContent className="pb-6">
                       <ul className="grid gap-x-8 gap-y-2 border-t border-border/50 pt-2 sm:grid-cols-2">
-                        {spec.details.map((detail: any, i: number) => (
+                        {spec.details.map((detail, i) => (
                           <li key={i} className="flex items-center justify-between border-b border-border/30 py-2 last:border-0 sm:last:border-b">
                             <span className="font-body text-xs text-muted-foreground sm:text-sm">{detail.label}</span>
                             <span className="text-right font-body text-xs font-semibold text-foreground sm:text-sm">{detail.value}</span>
@@ -421,7 +474,7 @@ const ProductPage = () => {
               <div className="space-y-4 text-center sm:space-y-6">
                 <p className="eyebrow-label text-center">Start Your Ritual</p>
                 <h2 className="section-title">Ready to Experience Clean Nutrition?</h2>
-                <p className="section-copy mx-auto max-w-2xl px-2">Join thousands who trust WellForged for their daily wellness routine.</p>
+                <p className="section-copy mx-auto max-w-2xl px-2">Join thousands who trust Wellforged for their daily wellness routine.</p>
                 <div className="flex justify-center">
                   <button
                     onClick={handleProcessTransition}

@@ -13,17 +13,17 @@ const ManifestoCTA = () => {
       <div className="relative z-10 mx-auto max-w-4xl px-1 text-center sm:px-0">
         <ScrollReveal animation="fade-up">
           <span className="inline-block font-body text-[9px] uppercase tracking-[0.15em] text-primary/70 sm:text-[10px] sm:tracking-[0.2em] lg:text-xs lg:tracking-[0.25em]">
-            Join the Movement
+            Your Next Move
           </span>
         </ScrollReveal>
         <ScrollReveal animation="fade-up" delay={100}>
           <h2 className="mb-3 font-display font-semibold text-foreground sm:mb-4 lg:mb-6" style={{ fontSize: "var(--text-3xl)" }}>
-            Ready to Verify?
+            Buy with Clarity, Not Guesswork
           </h2>
         </ScrollReveal>
         <ScrollReveal animation="fade-up" delay={200}>
           <p className="mx-auto mb-6 max-w-xl px-2 font-body leading-relaxed text-muted-foreground sm:mb-8 sm:max-w-2xl lg:mb-10" style={{ fontSize: "var(--text-base)" }}>
-            Explore the product, inspect the standard, and choose a wellness ritual built on evidence instead of assumption.
+            Explore the formula, inspect the standard, and choose a daily ritual that feels transparent from first click to first serving.
           </p>
         </ScrollReveal>
         <ScrollReveal animation="fade-up" delay={300}>
@@ -37,7 +37,7 @@ const ManifestoCTA = () => {
             <Link to="/product" onClick={() => window.scrollTo(0, 0)} className="w-full sm:w-auto">
               <Button variant="outline" size="default" className="h-11 w-full gap-2 border-2 text-sm transition-all duration-300 hover:border-primary/50 hover:bg-primary/5 sm:w-auto sm:text-base">
                 <ShoppingBag className="h-5 w-5" />
-                View the Collection
+                Shop the Collection
               </Button>
             </Link>
           </div>
@@ -45,7 +45,7 @@ const ManifestoCTA = () => {
         <ScrollReveal animation="fade-up" delay={400}>
           <div className="mt-8 border-t border-border pt-6 sm:mt-12 sm:pt-8 lg:mt-16 lg:pt-10">
             <p className="mb-2 font-display italic text-foreground" style={{ fontSize: "var(--text-base)" }}>
-              "We test so you do not have to guess."
+              "Proof should arrive before trust."
             </p>
             <p className="font-body text-sm font-semibold uppercase tracking-[0.16em] text-primary/80">WellForged Team</p>
           </div>

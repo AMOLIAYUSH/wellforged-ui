@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import { Link, useSearchParams } from "react-router-dom";
 import { Search, ArrowLeft, CheckCircle, XCircle, FileText, Beaker, Calendar, Package, Shield, Download, Share2, Loader2, Sparkles, Lock, Leaf, FlaskConical, Gift, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedLogo from "@/components/AnimatedLogo";
-import { useAuth } from "@/context/AuthContext";
 import { API_BASE_URL } from "@/config";
 
 // Hardcoded data removed, fetching from backend instead
@@ -26,7 +25,6 @@ const TransparencyPage = () => {
   const [loadingStep, setLoadingStep] = useState(0);
   const [showScorecard, setShowScorecard] = useState(false);
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
-  const { token } = useAuth();
   const [searchParams] = useSearchParams();
   const [latestBatchFetched, setLatestBatchFetched] = useState(false);
 
@@ -59,11 +57,6 @@ const TransparencyPage = () => {
     const batchParam = searchParams.get("batch");
     if (batchParam && !hasSearched && !isLoading) {
       setBatchNumber(batchParam);
-      // Auto-trigger search is a bit complex with current structure, 
-      // safer to just pre-fill and maybe trigger via a separate effect or ref refactoring.
-      // But let's try to just set it and let user click or validly trigger it.
-      // Actually, premium experience demands auto-search.
-      // We'll use a specific effect for this.
     }
   }, [searchParams, hasSearched, isLoading]);
 
@@ -71,23 +64,13 @@ const TransparencyPage = () => {
   useEffect(() => {
     const batchParam = searchParams.get("batch");
     if (batchParam && batchNumber === batchParam && !hasSearched && !isLoading) {
-      // Trigger search logic reusing the handler structure is hard without extracting it.
-      // Let's extract the core search logic or just simulate the event.
-      // Simulating event is messy. Let's just create a ref or simple trigger.
-      // Actually, we can just call a function if we move handleSearch definition up or use useCallback.
-      // For now, let's just pre-fill. The user can click verify. 
-      // Wait, "View Lab Report" implies immediate viewing.
-      // Let's extracting the fetch logic.
       const performAutoSearch = async () => {
-        // ... duplicate logic or refactor? Refactor is better but risky for "premium look" if I break animations.
-        // Let's just click the button programmatically if possible or copy logic.
-        // Copying core fetch logic is safest for now to ensure animations run.
         const e = { preventDefault: () => { } } as React.FormEvent;
         await handleSearch(e);
       }
       performAutoSearch();
     }
-  }, [batchNumber, searchParams, hasSearched, isLoading]); // Dependency on batchNumber ensures it runs after state update
+  }, [batchNumber, searchParams, hasSearched, isLoading]);
 
   const loadingSteps = [
     { text: "Connecting to Secure Database...", icon: Lock },
@@ -122,14 +105,9 @@ const TransparencyPage = () => {
     }, 800);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/inventory/batch-report?batch_number=${trimmedBatch}`, {
-        headers: {
-          ...(token ? { "Authorization": `Bearer ${token}` } : {})
-        }
-      });
+      const response = await fetch(`${API_BASE_URL}/api/inventory/batch-report?batch_number=${trimmedBatch}`);
       const data = await response.json();
 
-      // Artificial delay to show the "Forge" animations as requested by the premium design
       await new Promise(resolve => setTimeout(resolve, 3000));
 
       clearInterval(stepInterval);
@@ -137,11 +115,10 @@ const TransparencyPage = () => {
       setHasSearched(true);
 
       if (response.ok) {
-        // Map backend data to frontend interface if needed
         const batchData: BatchData = {
           batchNumber: data.batchNumber,
           productName: data.productName,
-          manufactureDate: data.manufactureDate || "2024-01-01", // Handled by controller now or defaults
+          manufactureDate: data.manufactureDate || "2024-01-01",
           expirationDate: data.expirationDate || "2026-01-01",
           testDate: data.testDate,
           labName: data.labName,
@@ -171,11 +148,14 @@ const TransparencyPage = () => {
 
   const handleTrySample = () => setBatchNumber("WF2026021212");
   const formatDate = (d: string) => new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
-  const handleShareResults = () => { navigator.clipboard.writeText(`${window.location.origin}/transparency?batch=${searchedBatch?.batchNumber}`); };
 
   return (
     <>
-      <Helmet><title>Transparency | WellForged</title><meta name="description" content="Validate your WellForged batch number to access verified third-party lab test results." /></Helmet>
+      <SEO 
+        title="Lab Reports & Batch Transparency"
+        description="Verify your Wellforged batch number to see independent lab results. We set the standard for radical transparency in wellness."
+        canonical="https://wellforged.in/transparency"
+      />
       <main className="min-h-screen bg-background flex flex-col page-pt">
         <header className="border-b border-border bg-background/95 backdrop-blur-lg fixed top-0 inset-x-0 z-50">
           <div className="max-w-[1440px] mx-auto px-[var(--space-sm)] lg:px-[var(--space-md)] py-[var(--space-xs)] lg:py-[var(--space-sm)]">
@@ -275,7 +255,7 @@ const TransparencyPage = () => {
                       </p>
                     </div>
 
-                    <h3 className="font-display text-xl sm:text-2xl font-semibold text-center text-foreground mb-6 animate-fade-up">WellForged Batch Scorecard</h3>
+                    <h3 className="font-display text-xl sm:text-2xl font-semibold text-center text-foreground mb-6 animate-fade-up">Wellforged Batch Scorecard</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
                       {scorecardItems.map((item, index) => {
                         const IconComponent = item.icon;

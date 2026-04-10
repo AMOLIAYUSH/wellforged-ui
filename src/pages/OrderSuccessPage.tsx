@@ -78,9 +78,9 @@ const OrderSuccessPage = () => {
           </div>
 
           <div className="animate-hero-fade-up-delay-5 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <Link to="/product">
+<Link to="/">
               <Button variant="hero" size="xl" className="h-12 px-6 text-sm sm:h-14 sm:px-10 sm:text-lg">
-                Continue Exploring
+                Back to Home
               </Button>
             </Link>
             <Link to="/transparency">

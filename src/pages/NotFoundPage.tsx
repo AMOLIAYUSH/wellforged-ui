@@ -52,7 +52,7 @@ const NotFoundPage = () => {
                         {/* Subtle hints for other pages */}
                         <Link to="/transparency" className="text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors">Lab Reports</Link>
                         <Link to="/about" className="text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors">Our Story</Link>
-                        <Link to="/profile" className="text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors hidden sm:block">My Account</Link>
+          <Link to="/checkout" className="text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors hidden sm:block">Checkout</Link>
                     </div>
                 </div>
             </main>
