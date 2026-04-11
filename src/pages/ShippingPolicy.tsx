@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 const ShippingPolicy = () => {
     return (
         <>
-            <SEO title="Shipping & Delivery Policy | WellForged" canonical="https://www.wellforged.in/shipping-policy" />
+                <SEO title="Shipping Policy | Wellforged" canonical="https://www.wellforged.in/shipping-policy" />
             <Navbar />
             <main className="pt-24 pb-16 min-h-screen bg-[#fcfdfc]">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

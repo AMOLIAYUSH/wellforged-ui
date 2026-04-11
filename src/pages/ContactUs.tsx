@@ -24,7 +24,7 @@ const ContactUs = () => {
 
     return (
         <>
-            <SEO title="Contact Us | WellForged" canonical="https://www.wellforged.in/contact-us" />
+                <SEO title="Contact Us | Wellforged" canonical="https://www.wellforged.in/contact-us" />
             <Navbar />
             <main className="pt-24 pb-16 min-h-screen bg-[#fcfdfc]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

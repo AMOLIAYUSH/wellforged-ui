@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 const RefundPolicy = () => {
     return (
         <>
-            <SEO title="Refund & Cancellation Policy | WellForged" canonical="https://www.wellforged.in/refund-policy" />
+                <SEO title="Refund Policy | Wellforged" canonical="https://www.wellforged.in/refund-policy" />
             <Navbar />
             <main className="pt-24 pb-16 min-h-screen bg-[#fcfdfc]">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

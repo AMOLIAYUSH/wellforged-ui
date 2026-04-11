@@ -8,10 +8,7 @@ import Footer from "@/components/Footer";
 const NotFoundPage = () => {
     return (
         <>
-            <Helmet>
-                <title>404 - Page Not Found | WellForged</title>
-                <meta name="description" content="The page you are looking for doesn't exist. Let's get you back on track with clean nutrition." />
-            </Helmet>
+            <SEO title="Page Not Found | Wellforged" noindex={true} description="The page you are looking for doesn't exist. Let's get you back on track with clean nutrition." />
             <Navbar />
             <main className="min-h-screen bg-background flex flex-col items-center justify-center p-4 pt-20">
                 <div className="max-w-2xl w-full text-center space-y-8 animate-fade-up">

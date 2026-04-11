@@ -182,7 +182,7 @@ const AdminDashboard = () => {
 
     return (
         <div className="min-h-screen bg-[#fcfdfc]">
-            <SEO title="Admin Dashboard | WellForged" noindex={true} />
+            <SEO title="Admin | Wellforged" noindex={true} />
             <Navbar />
 
             <main className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
