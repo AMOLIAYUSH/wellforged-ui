@@ -154,7 +154,7 @@ const TransparencyPage = () => {
       <SEO 
         title="Lab Reports & Batch Transparency"
         description="Verify your Wellforged batch number to see independent lab results. We set the standard for radical transparency in wellness."
-        canonical="https://wellforged.in/transparency"
+        canonical="https://www.wellforged.in/transparency"
       />
       <main className="min-h-screen bg-background flex flex-col page-pt">
         <header className="border-b border-border bg-background/95 backdrop-blur-lg fixed top-0 inset-x-0 z-50">

@@ -14,8 +14,8 @@ interface SEOProps {
 const SEO = ({
   title = "Wellforged | The No Nonsense Supplement Brand",
   description = "Pure ingredients, zero fillers, and absolute clarity. Wellforged is the no nonsense supplement brand built on integrity and evidence.",
-  canonical = "https://wellforged.in",
-  ogImage = "https://wellforged.in/assets/Packaging_Updated.png",
+  canonical = "https://www.wellforged.in",
+  ogImage = "https://www.wellforged.in/assets/Packaging_Updated.png",
   ogType = "website",
   twitterHandle = "@wellforged",
   jsonLd,
@@ -33,8 +33,8 @@ const SEO = ({
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Wellforged",
-    "url": "https://wellforged.in",
-    "logo": "https://wellforged.in/assets/Transparent_logo.png",
+    "url": "https://www.wellforged.in",
+    "logo": "https://www.wellforged.in/assets/Transparent_logo.png",
     "sameAs": [
       "https://www.instagram.com/wellforged",
       "https://twitter.com/wellforged"

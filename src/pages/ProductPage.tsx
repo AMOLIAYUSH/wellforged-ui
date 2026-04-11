@@ -153,7 +153,7 @@ const ProductPage = () => {
 
   const productName = product?.name || "Pure Moringa Leaf Powder";
   const productDescription = product?.base_description || "Wellforged Moringa Leaf Powder - Clean, single-ingredient moringa powder crafted with disciplined sourcing and verified lab quality.";
-  const canonicalUrl = `https://wellforged.in/product/${slug}`;
+  const canonicalUrl = `https://www.wellforged.in/product/${slug}`;
   const seoTitle = `${productName} | Clean Single-Ingredient Wellness`;
 
   return (
@@ -163,14 +163,14 @@ const ProductPage = () => {
         description={productDescription}
         canonical={canonicalUrl}
         ogType="product"
-        ogImage="https://wellforged.in/assets/Packaging_Updated.png"
+        ogImage="https://www.wellforged.in/assets/Packaging_Updated.png"
         jsonLd={{
           "@context": "https://schema.org/",
           "@type": "Product",
           "name": `Wellforged ${productName}`,
           "image": [
-            "https://wellforged.in/assets/product-carousel-1.jpg",
-            "https://wellforged.in/assets/Packaging_Updated.png"
+            "https://www.wellforged.in/assets/product-carousel-1.jpg",
+            "https://www.wellforged.in/assets/Packaging_Updated.png"
           ],
           "description": productDescription,
           "sku": slug,
