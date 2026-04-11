@@ -26,8 +26,8 @@ const Index = () => {
     return (
         <>
             <SEO 
-                title="Radically Transparent Wellness Supplements"
-                description="Most brands ask for your trust. Wellforged provides the proof. Welcome to the new standard of radical transparency in pure, lab-tested wellness."
+                title="The No Nonsense Supplement Brand"
+                description="Pure, lab-tested wellness with zero fillers and absolute clarity. Wellforged is the no nonsense standard for those who demand integrity in every serving."
                 canonical="https://wellforged.in"
                 jsonLd={{
                     "@context": "https://schema.org",

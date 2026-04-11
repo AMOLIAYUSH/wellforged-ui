@@ -12,8 +12,8 @@ interface SEOProps {
 }
 
 const SEO = ({
-  title = "Wellforged | Radically Transparent Wellness Supplements",
-  description = "Most brands ask for your trust. We provide the proof. Welcome to the new standard of radical transparency in wellness.",
+  title = "Wellforged | The No Nonsense Supplement Brand",
+  description = "Pure ingredients, zero fillers, and absolute clarity. Wellforged is the no nonsense supplement brand built on integrity and evidence.",
   canonical = "https://wellforged.in",
   ogImage = "https://wellforged.in/assets/Packaging_Updated.png",
   ogType = "website",

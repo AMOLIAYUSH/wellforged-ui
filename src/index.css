@@ -261,8 +261,16 @@
   }
 
   .premium-pill {
-    @apply inline-flex items-center rounded-full border border-primary/10 bg-background/75;
-    box-shadow: 0 8px 24px -22px hsl(var(--primary) / 0.22);
+    @apply inline-flex items-center rounded-full border border-primary/20 bg-background/80 backdrop-blur-md;
+    box-shadow: 
+      0 4px 12px -1px hsl(var(--primary) / 0.05),
+      0 2px 4px -1px hsl(var(--primary) / 0.03);
+    transition: all 0.3s ease;
+  }
+
+  .premium-pill:hover {
+    @apply border-primary/30 bg-background/90;
+    box-shadow: 0 10px 30px -15px hsl(var(--primary) / 0.12);
   }
 
   .eyebrow-label {
@@ -738,15 +746,27 @@
   }
 
   @keyframes pulseSubtle {
-
-    0%,
-    100% {
+    0%, 100% {
       box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4);
     }
-
     50% {
       box-shadow: 0 0 0 8px hsl(var(--primary) / 0);
     }
+  }
+
+  @keyframes pulse-premium {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+  }
+
+  .animate-pulse-premium {
+    animation: pulse-premium 2.5s ease-in-out infinite;
   }
 
   .animate-pulse-subtle {
@@ -884,4 +904,16 @@
       filter: drop-shadow(0 0 20px hsl(var(--primary) / 0.4));
     }
   }
+
+  .premium-hover-gold {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .premium-hover-gold:hover {
+    background: linear-gradient(135deg, hsl(var(--gold) / 0.08), hsl(var(--gold) / 0.03));
+    border-color: hsl(var(--gold) / 0.3);
+    box-shadow: 0 20px 40px -20px hsl(var(--gold) / 0.15);
+    transform: translateY(-4px);
+  }
 }
+

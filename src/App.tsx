@@ -26,15 +26,9 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 const queryClient = new QueryClient();
 
-const RouteFallback = () => (
-    <div className="page-pt flex min-h-screen items-center justify-center bg-background">
-        <div className="premium-panel flex min-w-[18rem] flex-col items-center gap-3 px-6 py-8 text-center">
-            <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary/15 border-t-primary" />
-            <p className="eyebrow-label">Loading</p>
-            <p className="font-body text-sm text-muted-foreground">Preparing the next WellForged experience.</p>
-        </div>
-    </div>
-);
+import PageLoader from "@/components/PageLoader";
+
+const RouteFallback = () => <PageLoader />;
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();

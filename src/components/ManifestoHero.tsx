@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowRight, ShieldCheck } from "lucide-react";
+import { ShoppingBag, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import AnimatedLogo from "@/components/AnimatedLogo";
@@ -34,9 +34,9 @@ const ManifestoHero = () => {
         </div>
 
         <div className="animate-hero-fade-up mb-4 sm:mb-[var(--space-sm)]">
-          <span className="premium-pill max-w-full gap-2 px-4 py-2 text-[0.68rem] sm:text-[var(--text-xs)] font-semibold uppercase tracking-[0.15em] text-primary">
+          <span className="premium-pill max-w-full gap-2 px-5 py-2.5 text-[0.68rem] sm:text-[var(--text-xs)] font-bold uppercase tracking-[0.18em] text-primary shadow-sm hover:shadow-md transition-shadow duration-300">
             <ShieldCheck className="h-3.5 w-3.5" />
-            The New Standard of Radical Transparency
+            The No Nonsense Supplement Brand
           </span>
         </div>
 
@@ -53,7 +53,7 @@ const ManifestoHero = () => {
             Most brands ask for your trust. <span className="text-foreground font-semibold">We let you inspect the proof before you commit.</span>
           </p>
           <p className="font-body text-[0.9rem] sm:text-[var(--text-base)] text-muted-foreground/90 leading-[1.7] mb-6 sm:mb-[var(--space-lg)] max-w-xl mx-auto">
-            Single-origin sourcing, independent testing, and batch-level verification for a ritual that feels measured, not marketed.
+            Single-origin sourcing, independent testing, and batch-level verification for a supplement ritual that feels measured, not marketed.
           </p>
 
           <div className="mb-5 sm:mb-7 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
@@ -65,8 +65,8 @@ const ManifestoHero = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-[var(--space-sm)]">
             <Link to="/product" className="w-full sm:w-auto">
               <Button variant="hero" size="xl" className="h-12 sm:h-14 px-6 sm:px-10 text-sm sm:text-base font-bold uppercase tracking-[0.14em] sm:tracking-[0.18em] group w-full">
-                Shop the Evidence
-                <ArrowRight className="h-5 w-5 ml-2 transition-transform group-hover:translate-x-1" />
+                Buy Moringa
+                <ShoppingBag className="h-5 w-5 ml-2 transition-transform group-hover:scale-110" />
               </Button>
             </Link>
             <Link to="/transparency" className="w-full sm:w-auto">

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Truck, Shield, CheckCircle, MapPin, Tag, X } from "lucide-react";
+import { Truck, Shield, CheckCircle, MapPin, Tag, X, User, Mail, Phone, Building, Hash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useCart } from "@/context/CartContext";
@@ -49,8 +49,10 @@ const CheckoutPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleApplyCoupon = async () => {
-    if (!couponCode.trim()) {
+  const handleApplyCoupon = async (codeOverride?: string) => {
+    const codeToApply = codeOverride || couponCode;
+    
+    if (!codeToApply.trim()) {
       setCouponHelper("Please enter a valid coupon code.");
       toast.error("Please enter a coupon code");
       return;
@@ -62,7 +64,7 @@ const CheckoutPage = () => {
       const response = await fetch(`${API_BASE_URL}/api/coupons/validate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code: couponCode, subtotal }),
+        body: JSON.stringify({ code: codeToApply, subtotal }),
       });
 
       const data = await response.json();
@@ -158,67 +160,83 @@ const CheckoutPage = () => {
             <div className="grid gap-6 lg:grid-cols-5 lg:gap-8">
               <div className="space-y-6 lg:col-span-3">
                 {step === 1 && (
-                  <div className="premium-panel p-4 sm:p-6">
-                    <div className="mb-4 flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <MapPin className="h-5 w-5 text-primary" />
-                        <div>
-                          <p className="eyebrow-label">Step 1</p>
-                          <h2 className="font-display text-foreground" style={{ fontSize: "var(--text-lg)" }}>
-                            Shipping Details
-                          </h2>
-                        </div>
-                      </div>
-                    </div>
-
+                  <div className="premium-panel p-5 sm:p-7">
                     <div className="space-y-4">
-                      <div>
-                        <label className="mb-1.5 block font-body text-[var(--text-xs)] font-semibold uppercase tracking-[0.14em] text-foreground/80">
-                          Full Name *
-                        </label>
-                        <Input name="fullName" value={formData.fullName} onChange={handleInputChange} placeholder="Enter your full name" className="h-[var(--space-xl)]" />
-                      </div>
-                      <div>
-                        <label className="mb-1.5 block font-body text-[var(--text-xs)] font-semibold uppercase tracking-[0.14em] text-foreground/80">
-                          Email Address *
-                        </label>
-                        <Input name="email" type="email" value={formData.email} onChange={handleInputChange} placeholder="yourname@domain.com" className="h-[var(--space-xl)]" />
-                      </div>
-                      <div>
-                        <label className="mb-1.5 block font-body text-[var(--text-xs)] font-semibold uppercase tracking-[0.14em] text-foreground/80">
-                          Phone Number *
-                        </label>
-                        <Input name="phone" type="tel" value={formData.phone} onChange={handleInputChange} placeholder="10-digit mobile number" className="h-[var(--space-xl)]" />
-                      </div>
-                      <div>
-                        <label className="mb-1.5 block font-body text-[var(--text-xs)] font-semibold uppercase tracking-[0.14em] text-foreground/80">
-                          Address *
-                        </label>
-                        <Input name="address" value={formData.address} onChange={handleInputChange} placeholder="House/Flat No., Street, Locality" className="h-[var(--space-xl)]" />
-                      </div>
-                      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                        <div>
-                          <label className="mb-1.5 block font-body text-[var(--text-xs)] font-semibold uppercase tracking-[0.14em] text-foreground/80">
-                            Pincode *
+                      {/* Section: Contact Information */}
+                      <div className="grid gap-x-4 gap-y-3 sm:grid-cols-2">
+                         <div className="sm:col-span-2">
+                          <label className="mb-1 block font-body text-xs font-medium text-foreground/70">
+                            Full Name
                           </label>
-                          <Input name="pincode" value={formData.pincode} onChange={handleInputChange} placeholder="6-digit pincode" className="h-[var(--space-xl)]" />
+                          <div className="relative">
+                            <User className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground/50" />
+                            <Input name="fullName" value={formData.fullName} onChange={handleInputChange} placeholder="Enter your full name" className="h-11 pl-10 text-sm transition-all focus:border-primary/50 focus:ring-primary/10" />
+                          </div>
                         </div>
+                        
                         <div>
-                          <label className="mb-1.5 block font-body text-[var(--text-xs)] font-semibold uppercase tracking-[0.14em] text-foreground/80">
-                            City *
+                          <label className="mb-1 block font-body text-xs font-medium text-foreground/70">
+                            Email Address
                           </label>
-                          <Input name="city" value={formData.city} onChange={handleInputChange} placeholder="Enter city name" className="h-[var(--space-xl)]" />
+                          <div className="relative">
+                            <Mail className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground/50" />
+                            <Input name="email" type="email" value={formData.email} onChange={handleInputChange} placeholder="yourname@domain.com" className="h-11 pl-10 text-sm transition-all focus:border-primary/50 focus:ring-primary/10" />
+                          </div>
                         </div>
-                      </div>
-                      <div>
-                        <label className="mb-1.5 block font-body text-[var(--text-xs)] font-semibold uppercase tracking-[0.14em] text-foreground/80">
-                          State *
-                        </label>
-                        <Input name="state" value={formData.state} onChange={handleInputChange} placeholder="Enter state name" className="h-[var(--space-xl)]" />
+                        
+                        <div>
+                          <label className="mb-1 block font-body text-xs font-medium text-foreground/70">
+                            Phone Number
+                          </label>
+                          <div className="relative">
+                            <Phone className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground/50" />
+                            <Input name="phone" type="tel" value={formData.phone} onChange={handleInputChange} placeholder="10-digit mobile number" className="h-11 pl-10 text-sm transition-all focus:border-primary/50 focus:ring-primary/10" />
+                          </div>
+                        </div>
+
+                        <div className="sm:col-span-2">
+                          <label className="mb-1 block font-body text-xs font-medium text-foreground/70">
+                            Street Address
+                          </label>
+                          <div className="relative">
+                            <MapPin className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground/50" />
+                            <Input name="address" value={formData.address} onChange={handleInputChange} placeholder="House/Flat No., Street, Locality" className="h-11 pl-10 text-sm transition-all focus:border-primary/50 focus:ring-primary/10" />
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <label className="mb-1 block font-body text-xs font-medium text-foreground/70">
+                            Pincode
+                          </label>
+                          <div className="relative">
+                            <Hash className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground/50" />
+                            <Input name="pincode" value={formData.pincode} onChange={handleInputChange} placeholder="6-digit pincode" className="h-11 pl-10 text-sm transition-all focus:border-primary/50 focus:ring-primary/10" />
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <label className="mb-1 block font-body text-xs font-medium text-foreground/70">
+                            City
+                          </label>
+                          <div className="relative">
+                            <Building className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground/50" />
+                            <Input name="city" value={formData.city} onChange={handleInputChange} placeholder="Enter city name" className="h-11 pl-10 text-sm transition-all focus:border-primary/50 focus:ring-primary/10" />
+                          </div>
+                        </div>
+
+                        <div className="sm:col-span-2">
+                          <label className="mb-1 block font-body text-xs font-medium text-foreground/70">
+                            State
+                          </label>
+                          <div className="relative">
+                            <MapPin className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground/50" />
+                            <Input name="state" value={formData.state} onChange={handleInputChange} placeholder="Enter state name" className="h-11 pl-10 text-sm transition-all focus:border-primary/50 focus:ring-primary/10" />
+                          </div>
+                        </div>
                       </div>
                     </div>
 
-                    <Button variant="hero" size="xl" className="mt-6 h-[var(--space-xl)] w-full font-bold uppercase tracking-[0.14em] sm:tracking-[0.18em]" onClick={handleContinue}>
+                    <Button variant="hero" size="xl" className="mt-6 h-12 w-full shadow-lg shadow-primary/10 transition-all hover:shadow-xl hover:shadow-primary/20 active:scale-[0.98]" onClick={handleContinue}>
                       Continue to Summary
                     </Button>
                   </div>
@@ -315,70 +333,46 @@ const CheckoutPage = () => {
 
                   <div className="mb-4 border-b border-border pb-4">
                     {!appliedCoupon ? (
-                      <div className="rounded-2xl border border-border/80 bg-secondary/20 p-4">
-                        <div className="mb-3 flex items-start justify-between gap-3">
-                          <div>
-                            <p className="eyebrow-label">Offers & Savings</p>
-                            <p className="mt-1 font-body text-sm text-muted-foreground">
-                              Apply a valid code to unlock your best checkout price.
+                      <div className="rounded-2xl border border-dashed border-primary/20 bg-secondary/15 p-5 transition-all">
+                        <div className="mb-4 flex items-center gap-2">
+                          <Tag className="h-4 w-4 text-primary" />
+                          <p className="font-display text-xs font-bold uppercase tracking-widest text-primary">Limited Time Offer</p>
+                        </div>
+
+                        {suggestedCoupon ? (
+                          <div className="flex flex-col gap-4">
+                            <div className="space-y-1">
+                              <h3 className="font-display text-sm font-bold text-foreground">
+                                Save Rs {suggestedCoupon.discount} with code {suggestedCoupon.code}
+                              </h3>
+                              <p className="font-body text-xs text-muted-foreground">
+                                Best savings available for your current subtotal of Rs {subtotal.toLocaleString()}.
+                              </p>
+                            </div>
+                            
+                            <Button
+                              type="button"
+                              variant="hero"
+                              onClick={() => {
+                                const code = suggestedCoupon.code;
+                                setCouponCode(code);
+                                handleApplyCoupon(code);
+                              }}
+                              className="h-12 w-full bg-[#1A3C34] text-white hover:bg-[#1A3C34]/90 shadow-lg shadow-[#1A3C34]/10 transition-all font-bold tracking-widest active:scale-[0.98]"
+                            >
+                              {isValidatingCoupon ? "APPLYING..." : "APPLY COUPON NOW"}
+                            </Button>
+                          </div>
+                        ) : (
+                          <div className="text-center py-2">
+                            <p className="font-body text-xs text-muted-foreground">
+                              Add more items worth Rs {Math.max(0, 349 - subtotal)} more to unlock exclusive savings.
                             </p>
                           </div>
-                          {suggestedCoupon && (
-                            <span className="premium-pill px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-primary">
-                              Best Match
-                            </span>
-                          )}
-                        </div>
-
-                        <div className="mb-2 flex flex-wrap gap-2">
-                          {suggestedCoupon ? (
-                            <>
-                              <button
-                                type="button"
-                                onClick={() => setCouponCode(suggestedCoupon.code)}
-                                className="rounded-full border border-gold/25 bg-background px-3 py-1.5 font-body text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-primary transition-colors hover:border-primary/30 hover:bg-primary/5"
-                              >
-                                Use {suggestedCoupon.code}
-                              </button>
-                              <span className="rounded-full border border-border/70 bg-background px-3 py-1.5 font-body text-[0.68rem] text-muted-foreground">
-                                Save Rs {suggestedCoupon.discount} on this cart
-                              </span>
-                            </>
-                          ) : (
-                            <span className="rounded-full border border-border/70 bg-background px-3 py-1.5 font-body text-[0.68rem] text-muted-foreground">
-                              Add more items to unlock savings
-                            </span>
-                          )}
-                        </div>
-
-                        {suggestedCoupon && (
-                          <p className="mb-2 font-body text-xs text-muted-foreground">
-                            Eligible suggestion based on your subtotal of Rs {subtotal.toLocaleString()}.
-                          </p>
                         )}
 
-                        <div className="flex flex-col gap-2 sm:flex-row">
-                          <Input
-                            value={couponCode}
-                            onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
-                            placeholder="Enter coupon code"
-                            className="h-10 w-full bg-background text-base md:text-sm"
-                            disabled={isValidatingCoupon}
-                          />
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={handleApplyCoupon}
-                            disabled={isValidatingCoupon || !couponCode.trim()}
-                            className="h-10 w-full gap-1.5 px-4 sm:w-auto"
-                          >
-                            <Tag className="h-3.5 w-3.5" />
-                            {isValidatingCoupon ? "Checking..." : "Apply"}
-                          </Button>
-                        </div>
-
                         {couponHelper && (
-                          <p className={`mt-2 font-body text-xs ${appliedCoupon ? "text-primary" : "text-muted-foreground"}`}>
+                          <p className={`mt-3 text-center font-body text-[10px] ${appliedCoupon ? "text-primary" : "text-muted-foreground/80"}`}>
                             {couponHelper}
                           </p>
                         )}
@@ -433,15 +427,6 @@ const CheckoutPage = () => {
                   )}
 
                   <div className="mt-4 flex flex-wrap justify-center gap-3 border-t border-border pt-3">
-                    <div className="mb-2 w-full rounded-xl border border-primary/20 bg-primary/5 p-3 sm:p-4">
-                      <div className="mb-1.5 flex items-center gap-2">
-                        <Shield className="h-4 w-4 text-primary" />
-                        <span className="font-display text-xs font-bold text-foreground">Money-Back Transparency Guarantee</span>
-                      </div>
-                      <p className="text-balance font-body text-[10px] leading-snug text-muted-foreground">
-                        If your specific batch lab report is not available or shows any impurity, we will refund your entire order immediately.
-                      </p>
-                    </div>
                     <div className="flex items-center gap-1.5 text-muted-foreground">
                       <Shield className="h-4 w-4 text-primary" />
                       <span className="font-body text-xs">Secure Checkout</span>

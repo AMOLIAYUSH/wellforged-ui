@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import SEO from "@/components/SEO";
 import { useNavigate } from "react-router-dom";
-import { Check, Leaf, Shield, FlaskConical, QrCode, Globe, CheckCircle, ChevronLeft, ChevronRight, Sparkles, Clock3, HeartHandshake } from "lucide-react";
+import { Check, Leaf, Shield, FlaskConical, QrCode, Globe, CheckCircle, ChevronLeft, ChevronRight, Sparkles, Clock3, HeartHandshake, ArrowRight, CheckCircle2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -106,12 +106,19 @@ const ProductPage = () => {
 
   const trustHighlights: HighlightPill[] =
     product?.metadata
-      ?.filter((m) => m.category === "highlight")
+      ?.filter(
+        (m) =>
+          m.category === "highlight" &&
+          !m.key.toLowerCase().includes("sustainable") &&
+          !m.key.toLowerCase().includes("source") &&
+          !m.value?.toLowerCase()?.includes("sustainable")
+      )
       .map((m) => ({
-        icon: m.icon_name === "Leaf" ? Leaf : m.icon_name === "Shield" ? Shield : m.icon_name === "FlaskConical" ? FlaskConical : CheckCircle,
-        label: m.key,
-      })) || [
-      { icon: Leaf, label: "Single Ingredient" },
+        icon: m.key.toLowerCase().includes("process") || m.key.toLowerCase().includes("origin") ? Leaf : m.icon_name === "Leaf" ? Leaf : m.icon_name === "Shield" ? Shield : m.icon_name === "FlaskConical" ? FlaskConical : CheckCircle,
+        label: m.key.toLowerCase().includes("cold processed") ? "Single Origin" : m.key,
+      }))
+      .filter((m) => !m.label.toLowerCase().includes("sustainable") && !m.label.toLowerCase().includes("source")) || [
+      { icon: Leaf, label: "Single Origin" },
       { icon: Shield, label: "No Additives" },
       { icon: FlaskConical, label: "Lab Tested" },
       { icon: QrCode, label: "Batch Verified" },
@@ -139,24 +146,6 @@ const ProductPage = () => {
       ? product.faqs
       : [{ question: "Is this product lab tested?", answer: "Yes, every batch undergoes independent third-party laboratory testing." }];
 
-  const useBlocks = [
-    {
-      icon: Sparkles,
-      title: "How to Use",
-      body: "Add one spoon to water, smoothies, or curd. Start with a simple daily serving and keep the ritual consistent for best results.",
-    },
-    {
-      icon: HeartHandshake,
-      title: "Who It Is For",
-      body: "Ideal for customers who want an uncomplicated greens habit without sweeteners, flavors, sugar alcohols, or proprietary blends.",
-    },
-    {
-      icon: Clock3,
-      title: "Expected Experience",
-      body: "Expect an earthy, natural taste, easy blending, and a routine that feels clean, minimal, and grounded rather than over-engineered.",
-    },
-  ];
-
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
@@ -168,8 +157,6 @@ const ProductPage = () => {
   const productName = product?.name || "Pure Moringa Leaf Powder";
   const productDescription = product?.base_description || "Wellforged Moringa Leaf Powder - Clean, single-ingredient moringa powder crafted with disciplined sourcing and verified lab quality.";
   const canonicalUrl = `https://wellforged.in/product/${slug}`;
-
-  // SEO Rectification: Brand-First Title
   const seoTitle = `${productName} | Clean Single-Ingredient Wellness`;
 
   return (
@@ -183,7 +170,7 @@ const ProductPage = () => {
         jsonLd={{
           "@context": "https://schema.org/",
           "@type": "Product",
-          "name": `Wellforged ${productName}`, // Explicit brand prefix in schema
+          "name": `Wellforged ${productName}`,
           "image": [
             "https://wellforged.in/assets/product-carousel-1.jpg",
             "https://wellforged.in/assets/Packaging_Updated.png"
@@ -242,9 +229,10 @@ const ProductPage = () => {
                       </button>
 
                       <div
-                        className="flex h-full transition-transform duration-500 ease-out"
+                        className="flex h-full transition-transform will-change-transform"
                         style={{
-                          transitionTimingFunction: "cubic-bezier(0.25, 1, 0.5, 1)",
+                          transitionDuration: "800ms",
+                          transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)", // Expo Out - very smooth & premium
                           transform: `translateX(-${currentImageIndex * (100 / productImages.length)}%)`,
                           width: `${productImages.length * 100}%`,
                         }}
@@ -270,7 +258,7 @@ const ProductPage = () => {
                             key={i}
                             onClick={() => goTo(i)}
                             aria-label={`Wellforged product thumbnail ${i + 1}`}
-                            className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
+                            className={`overflow-hidden rounded-2xl border transition-all duration-500 ease-out ${
                               i === currentImageIndex ? "border-primary shadow-[0_12px_24px_-18px_hsl(var(--primary)/0.45)]" : "border-border/80 opacity-75 hover:opacity-100"
                             }`}
                           >
@@ -301,9 +289,9 @@ const ProductPage = () => {
                       {product?.base_description ||
                         "Pure, nutrient-rich moringa powder lab tested, free from fillers, and crafted to deliver clean daily nourishment."}
                     </p>
-                    <div className="flex flex-wrap gap-2 pt-1">
-                      {trustHighlights.slice(0, 3).map(({ icon: Icon, label }) => (
-                        <span key={label} className="premium-pill gap-2 px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-primary sm:text-[0.72rem]">
+                    <div className="flex flex-nowrap items-center gap-2 overflow-x-auto pb-1 no-scrollbar sm:gap-3">
+                      {trustHighlights.map(({ icon: Icon, label }) => (
+                        <span key={label} className="premium-pill flex-shrink-0 gap-1.5 px-3 py-1.5 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-primary sm:text-[0.7rem]">
                           <Icon className="h-3.5 w-3.5" />
                           {label}
                         </span>
@@ -314,122 +302,49 @@ const ProductPage = () => {
 
                 <ScrollReveal animation="fade-up">
                   <div className="premium-panel border-gold/20 bg-gradient-to-b from-card to-secondary/30 p-4 shadow-gold sm:p-5">
-                    <ProductSelector product={product} />
+                    <ProductSelector product={product as ProductData} />
                   </div>
                 </ScrollReveal>
               </div>
             </div>
-
-            <div className="mt-[var(--space-lg)] grid gap-4 sm:mt-[var(--space-xl)] lg:grid-cols-3">
-              {useBlocks.map(({ icon: Icon, title, body }) => (
-                <ScrollReveal key={title} animation="fade-up">
-                  <div className="premium-panel h-full p-4 sm:p-5">
-                    <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/8">
-                      <Icon className="h-5 w-5 text-primary" />
-                    </div>
-                    <h3 className="font-display text-xl text-foreground">{title}</h3>
-                    <p className="mt-2 font-body text-sm leading-7 text-muted-foreground">{body}</p>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-
-            <div className="mt-6 sm:mt-8">
-              <ScrollReveal animation="fade-up">
-                <div className="space-y-[var(--space-sm)] sm:space-y-[var(--space-md)]">
-                  <div className="space-y-2 text-center">
-                    <p className="eyebrow-label">What Is Inside</p>
-                    <h2 className="section-title" style={{ fontSize: "var(--text-2xl)" }}>Ingredient Profile</h2>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4 lg:gap-6">
-                    {ingredients.map(({ icon: Icon, name }) => (
-                      <div key={name} className="premium-panel flex h-full flex-col items-center gap-2 p-3 text-center transition-all duration-200 hover:bg-primary/5 sm:gap-3 sm:p-4">
-                        <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-secondary sm:h-10 sm:w-10 sm:rounded-xl">
-                          <Icon className="h-4 w-4 text-primary sm:h-5 sm:w-5" />
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <h3 className="font-body text-xs font-semibold leading-tight text-foreground sm:text-sm">{name}</h3>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </ScrollReveal>
-            </div>
           </div>
         </section>
 
-        <section className="bg-secondary/30 py-10 sm:py-14 lg:py-20">
-          <div className="mx-auto max-w-6xl px-3 sm:px-6 lg:px-8">
+        {/* Section 1: Philosophy (Why We Chose Moringa) */}
+        <section className="premium-hover-gold border-y border-border/50 bg-secondary/15 py-16 sm:py-24">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <ScrollReveal animation="fade-up">
-              <div className="mb-[var(--space-lg)] text-center sm:mb-[var(--space-xl)]">
-                <span className="eyebrow-label text-gold">Quality Reference</span>
-                <h2 className="section-title mb-[var(--space-xs)] text-gold-gradient">Technical Specifications</h2>
-                <p className="section-copy mx-auto max-w-xl px-2 sm:max-w-2xl">Complete transparency on our sourcing, testing protocols, and purity standards.</p>
+              <div className="space-y-6 text-center">
+                <p className="eyebrow-label text-primary">Ingredient Philosophy</p>
+                <h2 className="section-title text-foreground" style={{ fontSize: "var(--text-3xl)" }}>Why We Chose Moringa</h2>
+                <p className="section-copy text-balance leading-relaxed text-muted-foreground" style={{ fontSize: "var(--text-lg)" }}>
+                  Moringa has long been valued as a nutrient-dense plant ingredient. We chose moringa for its versatility, simplicity, and alignment with our clean nutrition philosophy—disciplined sourcing and absolute purity.
+                </p>
               </div>
             </ScrollReveal>
-            <div className="mx-auto max-w-4xl">
-              <Accordion type="single" collapsible className="space-y-4">
-                {Object.values(technicalSpecs).map((spec, index) => (
-                  <AccordionItem key={spec.title} value={`spec-${index}`} className="premium-panel px-4 sm:px-6">
-                    <AccordionTrigger className="group py-4 hover:no-underline sm:py-6">
-                      <div className="flex items-center gap-3 text-left sm:gap-4">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 transition-colors group-hover:bg-primary/20 sm:h-12 sm:w-12">
-                          <spec.icon className="h-5 w-5 text-primary sm:h-6 sm:w-6" />
-                        </div>
-                        <div>
-                          <h3 className="font-display text-base font-semibold text-foreground sm:text-lg lg:text-xl">{spec.title}</h3>
-                          <p className="mt-0.5 font-body text-xs text-muted-foreground">Click to view detailed certifications and data</p>
-                        </div>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="pb-6">
-                      <ul className="grid gap-x-8 gap-y-2 border-t border-border/50 pt-2 sm:grid-cols-2">
-                        {spec.details.map((detail, i) => (
-                          <li key={i} className="flex items-center justify-between border-b border-border/30 py-2 last:border-0 sm:last:border-b">
-                            <span className="font-body text-xs text-muted-foreground sm:text-sm">{detail.label}</span>
-                            <span className="text-right font-body text-xs font-semibold text-foreground sm:text-sm">{detail.value}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
           </div>
         </section>
 
-        <section className="py-10 sm:py-14 lg:py-20">
-          <div className="mx-auto max-w-4xl px-3 sm:px-6 lg:px-8">
+        {/* Section 2: Product Differentiators */}
+        <section className="premium-hover-gold border-b border-border/50 py-16 sm:py-24">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <ScrollReveal animation="fade-up">
-              <p className="eyebrow-label text-center">Our Ingredient Philosophy</p>
-              <h2 className="section-title mb-3 text-center sm:mb-5">Why We Chose Moringa</h2>
-              <p className="section-copy px-2 text-center">
-                Moringa has long been valued as a nutrient-dense plant ingredient. We chose moringa for its versatility, simplicity, and alignment with our clean nutrition philosophy.
-              </p>
-            </ScrollReveal>
-          </div>
-        </section>
-
-        <section className="bg-secondary/30 py-10 sm:py-14 lg:py-20">
-          <div className="mx-auto max-w-4xl px-3 sm:px-6 lg:px-8">
-            <ScrollReveal animation="fade-up">
-              <p className="eyebrow-label text-center">Why Buy This</p>
-              <h2 className="section-title mb-4 text-center sm:mb-6">What Makes This Product Different</h2>
-              <div className="mx-auto max-w-2xl space-y-2 sm:space-y-3">
+              <div className="mb-12 text-center">
+                <p className="eyebrow-label text-gold">The wellforged Advantage</p>
+                <h2 className="section-title text-foreground">What Makes This Product Different</h2>
+              </div>
+              <div className="mx-auto max-w-3xl space-y-4">
                 {[
                   "Single-ingredient formulation with no hidden blends",
-                  "Carefully sourced leaves processed under controlled conditions",
-                  "Finely milled for smooth texture and easy mixing",
-                  "Each batch independently lab tested",
-                  "QR-based batch verification for complete transparency",
+                  "Verified potency: processed under controlled cold-drying protocols",
+                  "Finely triple-milled for smooth texture and superior blending",
+                  "Each batch independently lab tested for heavy metals and purity",
                 ].map((item, index) => (
-                  <div key={index} className="premium-panel group flex items-start gap-2.5 p-3.5 sm:gap-3 sm:p-4">
-                    <div className="mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 transition-all duration-300 group-hover:bg-primary/20 sm:h-5 sm:w-5">
-                      <Check className="h-2.5 w-2.5 text-primary sm:h-3 sm:w-3" />
+                  <div key={index} className="premium-panel group flex items-start gap-4 p-5 transition-all duration-300 hover:border-primary/30">
+                    <div className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <Check className="h-3.5 w-3.5" />
                     </div>
-                    <span className="font-body text-sm text-foreground sm:text-base">{item}</span>
+                    <span className="font-body text-base font-medium text-foreground sm:text-lg">{item}</span>
                   </div>
                 ))}
               </div>
@@ -437,18 +352,143 @@ const ProductPage = () => {
           </div>
         </section>
 
-        <section className="bg-secondary/30 py-10 sm:py-14 lg:py-20">
-          <div className="mx-auto max-w-3xl px-3 sm:px-6 lg:px-8">
+        {/* Section 3: Ideal Audience (Who is it for) */}
+        <section className="premium-hover-gold border-b border-border/50 bg-primary/[0.02] py-16 sm:py-24">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <ScrollReveal animation="fade-right">
+              <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+                <div className="space-y-6">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10">
+                    <HeartHandshake className="h-6 w-6 text-primary" />
+                  </div>
+                  <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl">Who Is It For?</h2>
+                  <p className="font-body text-lg leading-relaxed text-muted-foreground">
+                    Perfect for those seeking an uncomplicated greens habit without the clutter of sweeteners, flavors, or artificial blends. 
+                    If you value ingredient integrity over over-engineered marketing, you've found your daily ritual.
+                  </p>
+                </div>
+                <div className="premium-panel bg-background/50 p-8 shadow-sm">
+                   <ul className="space-y-4">
+                     {["Clean Label Enthusiasts", "Minimalist Nutrition Seekers", "Daily Habit Builders", "Transparent Quality Advocates"].map((tp) => (
+                       <li key={tp} className="flex items-center gap-3 font-display text-sm font-semibold tracking-wide text-primary">
+                         <CheckCircle2 className="h-4 w-4" /> {tp}
+                       </li>
+                     ))}
+                   </ul>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        {/* Section 4: Usage (How to use) */}
+        <section className="premium-hover-gold border-b border-border/50 py-16 sm:py-24">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <ScrollReveal animation="fade-left">
+              <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+                 <div className="order-2 premium-panel bg-secondary/10 p-1 lg:order-1">
+                    <div className="aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted/20">
+                      <img src={productImage2} className="h-full w-full object-cover opacity-80" alt="Moringa Ritual" />
+                    </div>
+                 </div>
+                 <div className="order-1 space-y-6 lg:order-2">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10">
+                      <Sparkles className="h-6 w-6 text-primary" />
+                    </div>
+                    <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl">How to Use</h2>
+                    <p className="font-body text-lg leading-relaxed text-muted-foreground">
+                      Add one spoon to water, smoothies, or curd. The ritual is simple: mix well and consume immediately. 
+                      Consistency is key—integrated it into your morning routine for the best long-term wellness impact.
+                    </p>
+                 </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        {/* Section 5: The Experience (Expected Experience) */}
+        <section className="premium-hover-gold border-b border-border/50 bg-secondary/5 py-16 sm:py-24">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <ScrollReveal animation="fade-up">
+              <div className="space-y-10 text-center">
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10">
+                  <Clock3 className="h-6 w-6 text-primary" />
+                </div>
+                <div className="space-y-4">
+                  <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl">The Expected Experience</h2>
+                  <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-muted-foreground">
+                    Our moringa is earthy and neutral—just as nature intended. You'll notice a fine, consistent texture that blends smoothly. 
+                    Expect a habit that feels grounded, clean, and entirely sustainable without the 'crash' or gimmicks.
+                  </p>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        {/* Section 6: Technical Specs (Transparency Refined) */}
+        <section className="bg-background py-16 sm:py-24">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <ScrollReveal animation="fade-up">
+              <div className="mb-14 text-center">
+                <span className="eyebrow-label text-gold">Public Quality Assurance</span>
+                <h2 className="section-title mb-4 text-gold-gradient">Technical Specifications</h2>
+                <p className="section-copy mx-auto max-w-2xl">
+                  Every batch is backed by rigorous documentation. View sourcing and purity metrics below.
+                </p>
+              </div>
+            </ScrollReveal>
+            <div className="mx-auto max-w-4xl space-y-6">
+              {Object.values(technicalSpecs).map((spec, index) => (
+                <div key={spec.title} className="premium-panel overflow-hidden border-border/60 bg-card p-0 shadow-sm transition-shadow hover:shadow-md">
+                  <div className="flex border-b border-border/50 bg-secondary/30 px-6 py-5 sm:px-8 sm:py-6">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
+                       <spec.icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <div className="ml-5">
+                      <h3 className="font-display text-lg font-bold text-foreground sm:text-xl">{spec.title}</h3>
+                      <p className="font-body text-xs text-muted-foreground">Verified Laboratory Standards</p>
+                    </div>
+                  </div>
+                  <div className="px-6 py-6 sm:px-8 sm:py-8">
+                    <ul className="grid gap-x-12 gap-y-1.5 sm:grid-cols-2">
+                       {spec.details.map((detail, i) => (
+                         <li key={i} className="flex items-center justify-between border-b border-border/20 py-2.5 last:border-0 sm:last:border-b">
+                            <span className="font-body text-sm text-muted-foreground">{detail.label}</span>
+                            <span className="text-right font-display text-sm font-bold text-foreground">{detail.value}</span>
+                         </li>
+                       ))}
+                    </ul>
+                    <div className="mt-8 flex justify-center border-t border-border/50 pt-8">
+                       <button 
+                        onClick={() => navigate("/transparency")}
+                        className="inline-flex items-center gap-2 font-display text-[var(--text-xs)] font-bold uppercase tracking-widest text-primary transition-all hover:gap-3 hover:text-primary/80"
+                       >
+                         <QrCode className="h-4 w-4" /> Verify Spec Benchmarks & Reports <ArrowRight className="h-4 w-4" />
+                       </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Section 7: FAQ (Restored) */}
+        <section className="bg-secondary/30 py-16 sm:py-24">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <ScrollReveal animation="fade-up">
               <p className="eyebrow-label text-center">Need Clarity</p>
               <h2 className="section-title mb-4 text-center sm:mb-6">Frequently Asked Questions</h2>
-              <Accordion type="single" collapsible className="space-y-2 sm:space-y-3">
+              <Accordion type="single" collapsible className="space-y-4">
                 {faqs.map((faq, index) => (
-                  <AccordionItem key={index} value={`faq-${index}`} className="premium-panel rounded-lg px-3 transition-shadow data-[state=open]:shadow-md sm:rounded-xl sm:px-5">
-                    <AccordionTrigger className="py-3 text-left font-display text-sm text-foreground hover:no-underline sm:py-4 sm:text-base">
+                  <AccordionItem key={index} value={`faq-${index}`} className="premium-panel bg-background px-5 py-2 transition-all hover:border-primary/30">
+                    <AccordionTrigger className="py-4 text-left font-display text-sm font-semibold text-foreground hover:no-underline sm:text-base">
                       {faq.question}
                     </AccordionTrigger>
-                    <AccordionContent className="pb-3 font-body text-xs text-muted-foreground sm:pb-4 sm:text-sm">{faq.answer}</AccordionContent>
+                    <AccordionContent className="pb-4 border-t border-border/30 pt-4 font-body text-sm leading-relaxed text-muted-foreground">
+                      {faq.answer}
+                    </AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>
