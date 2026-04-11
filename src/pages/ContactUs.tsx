@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
@@ -24,9 +24,7 @@ const ContactUs = () => {
 
     return (
         <>
-            <Helmet>
-                <title>Contact Us | WellForged</title>
-            </Helmet>
+            <SEO title="Contact Us | WellForged" canonical="https://www.wellforged.in/contact-us" />
             <Navbar />
             <main className="pt-24 pb-16 min-h-screen bg-[#fcfdfc]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -9,6 +9,7 @@ interface SEOProps {
   twitterHandle?: string;
   jsonLd?: Record<string, any> | Array<Record<string, any>>;
   googleSiteVerification?: string;
+  noindex?: boolean;
 }
 
 const SEO = ({
@@ -20,6 +21,7 @@ const SEO = ({
   twitterHandle = "@wellforged",
   jsonLd,
   googleSiteVerification = "uUXT8EOkidxG6y1nmQDFnmQYk6xex_vD_qgqY-AunuQ",
+  noindex = false,
 }: SEOProps) => {
   const siteName = "Wellforged";
   
@@ -77,8 +79,8 @@ const SEO = ({
       {twitterHandle && <meta name="twitter:site" content={twitterHandle} />}
 
       {/* Search Engine Directives */}
-      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-      <meta name="googlebot" content="index, follow" />
+      <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
+      <meta name="googlebot" content={noindex ? "noindex, nofollow" : "index, follow"} />
 
       {/* Structured Data */}
       {finalJsonLd.map((ld, i) => (

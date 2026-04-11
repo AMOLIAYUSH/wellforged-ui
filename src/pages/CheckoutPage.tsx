@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import { Truck, Shield, CheckCircle, MapPin, Tag, X, User, Mail, Phone, Building, Hash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -143,9 +143,7 @@ const CheckoutPage = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Checkout | WellForged</title>
-      </Helmet>
+      <SEO title="Checkout | WellForged" noindex={true} />
       <Navbar />
       <main className="page-pt min-h-screen bg-background pb-[var(--space-xl)]">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">

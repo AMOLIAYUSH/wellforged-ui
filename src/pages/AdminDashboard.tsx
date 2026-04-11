@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import {
     Package,
     ClipboardList,
@@ -182,9 +182,7 @@ const AdminDashboard = () => {
 
     return (
         <div className="min-h-screen bg-[#fcfdfc]">
-            <Helmet>
-                <title>Admin Dashboard | WellForged</title>
-            </Helmet>
+            <SEO title="Admin Dashboard | WellForged" noindex={true} />
             <Navbar />
 
             <main className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -267,7 +265,7 @@ const AdminDashboard = () => {
                                                         {new Date(order.created_at).toLocaleDateString()}
                                                     </td>
                                                     <td className="px-6 py-4 font-display font-bold text-foreground text-sm">
-                                                        ₹{order.total_amount}
+                                                        â‚¹{order.total_amount}
                                                     </td>
                                                     <td className="px-6 py-4">
                                                         <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold border uppercase tracking-wider ${getStatusColor(order.fulfillment_status)}`}>

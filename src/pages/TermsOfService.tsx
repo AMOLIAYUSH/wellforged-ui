@@ -1,13 +1,11 @@
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const TermsOfService = () => {
     return (
         <>
-            <Helmet>
-                <title>Terms of Service | WellForged</title>
-            </Helmet>
+            <SEO title="Terms of Service | WellForged" canonical="https://www.wellforged.in/terms-of-service" />
             <Navbar />
             <main className="pt-24 pb-16 min-h-screen bg-[#fcfdfc]">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

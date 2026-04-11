@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { Link } from "react-router-dom";
 import { CheckCircle, Shield, Truck, Clock3, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,7 +17,8 @@ const OrderSuccessPage = () => {
   }, []);
 
   return (
-    <>
+        <>
+            <SEO title="Order Verified | Wellforged" noindex={true} />
       <Navbar />
       <div className="relative min-h-screen overflow-hidden bg-background page-pt pb-12 pt-8 sm:pt-12">
         <Confetti width={windowSize.width} height={windowSize.height} recycle={false} numberOfPieces={170} gravity={0.09} colors={["#D4A545", "#23503D", "#F5F1E8"]} />

@@ -1,13 +1,11 @@
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const PrivacyPolicy = () => {
     return (
         <>
-            <Helmet>
-                <title>Privacy Policy | WellForged</title>
-            </Helmet>
+            <SEO title="Privacy Policy | WellForged" canonical="https://www.wellforged.in/privacy-policy" />
             <Navbar />
             <main className="pt-24 pb-16 min-h-screen bg-[#fcfdfc]">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
