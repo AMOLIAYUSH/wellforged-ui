@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import ProductSelector from "@/components/ProductSelector";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import PageLoader from "@/components/PageLoader";
 import { API_BASE_URL } from "@/config";
 import type { HighlightPill, ProductData } from "@/types/store";
 import productImage1 from "@/assets/product-carousel-1.jpg";
@@ -147,11 +148,7 @@ const ProductPage = () => {
       : [{ question: "Is this product lab tested?", answer: "Yes, every batch undergoes independent third-party laboratory testing." }];
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-primary" />
-      </div>
-    );
+    return <PageLoader />;
   }
 
   const productName = product?.name || "Pure Moringa Leaf Powder";
